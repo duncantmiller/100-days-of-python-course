@@ -1,9 +1,6 @@
-print("Enter the total bill abount")
-bill_amount = float(input())
-print("What percentage tip would you like to give? 15, 20 or 25?")
-tip_amount = int(input())
-print("How many people to split the bill?")
-people = int(input())
+bill_amount = float(input("Enter the total bill abount $"))
+tip_amount = int(input("What percentage tip would you like to give? 15, 20 or 25? "))
+people = int(input("How many people to split the bill? "))
 
 total = bill_amount * (1 + (tip_amount / 100))
 rounded_total = round(total, 2)
