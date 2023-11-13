@@ -13,10 +13,11 @@ elif size == "M":
 elif size == "L":
   price += 25
 
-if add_pepperoni == "Y" and size == "S":
-  price += 2
-elif add_pepperoni == "Y":
-  price += 3
+if add_pepperoni == "Y":
+  if size == "S":
+    price += 2
+  else:
+    price += 3
 
 if extra_cheese == "Y":
   price += 1
