@@ -10,6 +10,9 @@ if height >= 48:
     price = 7
   else:
     price = 12
+  want_photos = input("Do you want photos? Answer yes or no: ")
+  if want_photos == "yes":
+    price += 3
   print(f"Please pay ${price}.00 to ride this ride")
 else:
   print("Sorry you are not tall enough")
