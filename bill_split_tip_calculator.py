@@ -4,8 +4,8 @@ people = int(input("How many people to split the bill? "))
 
 total = bill_amount * (1 + (tip_amount / 100))
 rounded_total = round(total, 2)
-
 per_person = (rounded_total / people)
 per_person_rounded = round(per_person, 2)
+per_person_formatted = "{:.2f}".format(per_person_rounded)
 
-print(f"Each person should pay ${per_person_rounded}")
+print(f"Each person should pay ${per_person_formatted}")
