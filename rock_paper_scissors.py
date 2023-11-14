@@ -2,7 +2,11 @@ import random
 
 print("Play rock, paper, scissors against the computer!")
 
-player_choice = int(input("Type 0 for rock, 1 for paper or 2 for scissors: "))
+player_choice = int(input("What do you choose? Type 0 for rock, 1 for paper or 2 for scissors:\n"))
+
+while player_choice < 0 or player_choice > 2:
+  player_choice = int(input("You typed an invalid option. Type 0 for rock, 1 for paper or 2 for scissors:\n"))
+
 
 computer_choice = random.randint(0, 2)
 
