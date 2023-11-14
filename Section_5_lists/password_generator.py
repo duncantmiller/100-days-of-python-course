@@ -32,14 +32,15 @@ numbers_count = int(input(f"How many numbers would you like?\n"))
 
 password = []
 for count in range(0, letters_count):
-  password += letters[random.randint(0, len(letters) - 1)]
+    password += letters[random.randint(0, len(letters) - 1)]
 
 for count in range(0, numbers_count):
-  password += numbers[random.randint(0, len(numbers) - 1)]
+    password += numbers[random.randint(0, len(numbers) - 1)]
 
 for count in range(0, symbols_count):
-  password += symbols[random.randint(0, len(symbols) - 1)]
+    password += symbols[random.randint(0, len(symbols) - 1)]
 
 random.shuffle(password)
 
 print("".join(password))
+
