@@ -1,5 +1,34 @@
 import random
 
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+ascii_images = [rock, paper, scissors]
+
 print("Play rock, paper, scissors against the computer!")
 
 player_choice = int(input("What do you choose? Type 0 for rock, 1 for paper or 2 for scissors:\n"))
@@ -31,4 +60,12 @@ elif player_choice == 2:
   else:
     result_message = "You win, scissors cut paper"
 
-print(f"You chose {choices[player_choice]}. Computer chose {choices[computer_choice]}. {result_message}.")
+print(f"\nYou chose {choices[player_choice]}.")
+
+print(ascii_images[player_choice])
+
+print(f"Computer chose {choices[computer_choice]}.")
+
+print(ascii_images[computer_choice])
+
+print(f"{result_message}.")
