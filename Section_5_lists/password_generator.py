@@ -12,6 +12,17 @@ numbers_count = int(input(f"How many numbers would you like?\n"))
 #Eazy Level - Order not randomised:
 #e.g. 4 letter, 2 symbol, 2 number = JduE&!91
 
+password = ""
+for count in range(0, letters_count):
+  password += letters[random.randint(0, len(letters) - 1)]
+
+for count in range(0, numbers_count):
+  password += numbers[random.randint(0, len(numbers) - 1)]
+
+for count in range(0, symbols_count):
+  password += symbols[random.randint(0, len(symbols) - 1)]
+
+print(password)
 
 #Hard Level - Order of characters randomised:
 #e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
