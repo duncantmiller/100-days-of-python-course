@@ -3,11 +3,7 @@ import os
 def clear():  # Cross-platform clear screen
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def store_bid(bids, name, amount):
-    bids[name] = amount
-    return bids
-
-def winning_bid(bids):
+def winning_bid():
     highest_amount = 0
     for key in bids:
         bid_amount = bids[key]
@@ -26,13 +22,13 @@ while continue_bidding:
     name = input("What is your name?: ")
     amount = int(input("What's your bid?: $"))
     more_bidders = input("Are there any other bidders? Type 'yes' or 'no'.\n")
-    bids = store_bid(bids, name, amount)
+    bids[name] = amount
     if more_bidders == "yes":
         continue_bidding = True
         clear()
     else:
         continue_bidding = False
-        winner = winning_bid(bids)
+        winner = winning_bid()
         print(f"The winner is {winner['name']} with a bid of ${winner['amount']}")
         print("Goodbye.")
 
