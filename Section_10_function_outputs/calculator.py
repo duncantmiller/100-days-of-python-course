@@ -23,11 +23,11 @@ def calculator():
     number1 = float(input("What is the first number: "))
     continue_calculation = True
     while continue_calculation:
-        number2 = float(input("What is the second number: "))
         print("Operations available:")
         for symbol in calculator_functions:
             print(symbol)
         symbol = input("What operation symbol would you like to perform?: ")
+        number2 = float(input("What is the second number: "))
         calculator_function = calculator_functions[symbol]
         answer = calculator_function(number1, number2)
         print(f"{number1} {symbol} {number2} = {answer}")
