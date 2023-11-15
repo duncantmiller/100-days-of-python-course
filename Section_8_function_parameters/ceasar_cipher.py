@@ -30,7 +30,7 @@ text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
 if direction == "encode" or direction == "decode":
-    print(shifted_text(text, shift, direction))
+    print(f"The {direction}d text is:\n{shifted_text(text, shift, direction)}")
 else:
     print("Invalide encryption option, must be 'encode' or 'decode'")
 
