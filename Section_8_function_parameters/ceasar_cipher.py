@@ -28,14 +28,17 @@ def _normalize_position(position):
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 print(art.logo)
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+go = "yes"
+while go == "yes":
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
 
-if direction == "encode" or direction == "decode":
-    print(f"The {direction}d text is:\n{shifted_text(text, shift, direction)}")
-else:
-    print("Invalide encryption option, must be 'encode' or 'decode'")
+    if direction == "encode" or direction == "decode":
+        print(f"The {direction}d text is:\n{shifted_text(text, shift, direction)}")
+    else:
+        print("Invalide encryption option, must be 'encode' or 'decode'")
+    go = input("Would you like to keep encrypting messages? Type: 'yes' or 'no'\n")
 
 #TODO-1: Import and print the logo from art.py when the program starts.
 
