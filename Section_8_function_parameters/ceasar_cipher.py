@@ -3,14 +3,16 @@ import art
 def shifted_text(text, shift, direction):
     shift = _normalize_shift(shift)
     new_text = ''
-    for letter in text:
-        if alphabet.count(letter) > 0:
-            current_position = alphabet.index(letter)
-            new_position = _reposition(current_position, shift, direction)
-            new_text += alphabet[new_position]
-        else:
-            new_text += letter
+    for character in text:
+        new_text += _new_character(character, shift, direction)
     return new_text
+
+def _new_character(character, shift, direction):
+    if alphabet.count(character) > 0:
+        current_position = alphabet.index(character)
+        new_position = _reposition(current_position, shift, direction)
+        character = alphabet[new_position]
+    return character
 
 def _reposition(current_position, shift, direction):
     if direction == "decode":
@@ -42,8 +44,3 @@ while go == "yes":
     else:
         print("Invalide encryption option, must be 'encode' or 'decode'")
     go = input("Would you like to keep encrypting messages? Type: 'yes' or 'no'\n")
-
-#TODO-1: What happens if the user enters a number/symbol/space?
-    #Can you fix the code to keep the number/symbol/space when the text is encoded/decoded?
-    #e.g. start_text = "meet me at 3"
-    #end_text = "•••• •• •• 3"
