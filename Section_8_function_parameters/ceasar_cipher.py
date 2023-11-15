@@ -1,19 +1,19 @@
 def encrypt(text, shift):
-    shift = normalize_shift(shift)
+    shift = _normalize_shift(shift)
     encrypted_text = ''
     for letter in text:
         current_position = alphabet.index(letter)
-        new_position = normalize_position(current_position + shift)
+        new_position = _normalize_position(current_position + shift)
         encrypted_text += alphabet[new_position]
     return encrypted_text
 
-def normalize_shift(shift):
+def _normalize_shift(shift):
     if shift > 26:
         wraps = int(shift / 26)
         shift -= wraps * 26
     return shift
 
-def normalize_position(position):
+def _normalize_position(position):
     if position > 25:
         position -= 26
     return position
