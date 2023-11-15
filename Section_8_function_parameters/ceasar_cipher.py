@@ -1,20 +1,20 @@
 def encrypt(text, shift):
-    shift = _normalize_shift(shift)
-    encrypted_text = ''
-    for letter in text:
-        current_position = alphabet.index(letter)
-        new_position = _normalize_position(current_position + shift)
-        encrypted_text += alphabet[new_position]
-    return encrypted_text
+    return shifted_text(shift, text, "encrypt")
 
 def decrypt(text, shift):
+    return shifted_text(shift, text, "decrypt")
+
+def shifted_text(shift, text, direction):
     shift = _normalize_shift(shift)
-    decrypted_text = ''
+    new_text = ''
     for letter in text:
         current_position = alphabet.index(letter)
-        new_position = _normalize_position(current_position - shift)
-        decrypted_text += alphabet[new_position]
-    return decrypted_text
+        if direction == "encrypt":
+            new_position = _normalize_position(current_position + shift)
+        elif direction == "decrypt":
+            new_position = _normalize_position(current_position - shift)
+        new_text += alphabet[new_position]
+    return new_text
 
 def _normalize_shift(shift):
     if shift > 26:
