@@ -3,12 +3,14 @@ def shifted_text(text, shift, direction):
     new_text = ''
     for letter in text:
         current_position = alphabet.index(letter)
-        if direction == "encode":
-            new_position = _normalize_position(current_position + shift)
-        elif direction == "decode":
-            new_position = _normalize_position(current_position - shift)
+        new_position = _reposition(current_position, shift, direction)
         new_text += alphabet[new_position]
     return new_text
+
+def _reposition(current_position, shift, direction):
+    if direction == "decode":
+        shift *= -1
+    return _normalize_position(current_position + shift)
 
 def _normalize_shift(shift):
     if shift > 26:
