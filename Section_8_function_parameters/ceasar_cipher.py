@@ -3,9 +3,7 @@ def encrypt(text, shift):
     encrypted_text = ''
     for letter in text:
         current_position = alphabet.index(letter)
-        new_position = current_position + shift
-        if new_position > 25:
-            new_position -= 26
+        new_position = normalize_position(current_position + shift)
         encrypted_text += alphabet[new_position]
     return encrypted_text
 
@@ -14,6 +12,11 @@ def normalize_shift(shift):
         wraps = int(shift / 26)
         shift -= wraps * 26
     return shift
+
+def normalize_position(position):
+    if position > 25:
+        position -= 26
+    return position
 
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
