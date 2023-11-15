@@ -1,3 +1,5 @@
+from art import logo
+
 def add(number1, number2):
     return number1 + number2
 
@@ -44,4 +46,5 @@ def calculator():
             else:
                 print("Goodbye.")
 
+print(logo)
 calculator()
