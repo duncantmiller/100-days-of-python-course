@@ -1,17 +1,11 @@
-def encrypt(text, shift):
-    return shifted_text(shift, text, "encrypt")
-
-def decrypt(text, shift):
-    return shifted_text(shift, text, "decrypt")
-
-def shifted_text(shift, text, direction):
+def shifted_text(text, shift, direction):
     shift = _normalize_shift(shift)
     new_text = ''
     for letter in text:
         current_position = alphabet.index(letter)
-        if direction == "encrypt":
+        if direction == "encode":
             new_position = _normalize_position(current_position + shift)
-        elif direction == "decrypt":
+        elif direction == "decode":
             new_position = _normalize_position(current_position - shift)
         new_text += alphabet[new_position]
     return new_text
@@ -33,10 +27,10 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
-if direction == "encode":
-    print(encrypt(text, shift))
-elif direction == "decode":
-    print(decrypt(text, shift))
+if direction == "encode" or direction == "decode":
+    print(shifted_text(text, shift, direction))
+else:
+    print("Invalide encryption option, must be 'encode' or 'decode'")
 
 #TODO-1: Create a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
 
