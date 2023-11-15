@@ -18,10 +18,10 @@ calculator_functions = {
 }
 
 def calculator():
-    number1 = int(input("What is the first number: "))
+    number1 = float(input("What is the first number: "))
     continue_calculation = True
     while continue_calculation:
-        number2 = int(input("What is the second number: "))
+        number2 = float(input("What is the second number: "))
         print("Operations available:")
         for symbol in calculator_functions:
             print(symbol)
