@@ -39,14 +39,12 @@ def deal_and_update_hand(hand):
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_cards = deal(2)
 dealer_cards = deal(2)
-
 print("Your cards are:")
 print(f"{player_cards} (total {total(player_cards)})")
-print("Dealer showing")
-print(dealer_cards[1])
-
 keep_dealing = True
 while keep_dealing:
+    print("Dealer showing")
+    print(dealer_cards[1])
     action = input(f"You have  do you want to hit or stay? Type 'h' of 's':\n")
     if action == "h":
         deal_and_update_hand(player_cards)
