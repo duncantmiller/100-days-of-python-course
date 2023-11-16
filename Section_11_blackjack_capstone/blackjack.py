@@ -74,8 +74,18 @@ def update_player_balance(balance, bet, winner):
         balance -= bet
     return balance
 
+def is_invalid(bet, balance):
+    if bet > balance:
+        print(f"Sorry the most you can bet is: ${balance}")
+        return True
+    else:
+        return False
+
 def blackjack(balance):
-    bet = int(input("How much do you want to bet:\n$"))
+    get_new_bet = True
+    while get_new_bet:
+        bet = int(input("How much do you want to bet:\n$"))
+        get_new_bet = is_invalid(bet, balance)
     player_cards = deal(2)
     dealer_cards = deal(2)
     print_card_message("player", player_cards)
@@ -105,7 +115,6 @@ def blackjack(balance):
     winner = determine_winner(player_cards, dealer_cards)
     new_balance = update_player_balance(balance, bet, winner)
     print_winner_message(winner)
-    print_balance_message(new_balance)
 
     return new_balance
 
@@ -119,8 +128,11 @@ should_play = True
 while should_play:
     player_balance = blackjack(player_balance)
     print_balance_message(player_balance)
-    should_play_again = input("Do you want to keep playing? Type 'y' of 'n':\n")
+    if player_balance > 0:
+        should_play_again = input("Do you want to keep playing? Type 'y' of 'n':\n")
+    else:
+        should_play_again = "n"
+
     if should_play_again == "n":
         should_play = False
         print(f"Your final balance is {player_balance}. Goodbye it's been a pleasure having you at PyCasino.")
-
