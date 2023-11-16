@@ -47,13 +47,9 @@ def print_card_message(user, cards):
     print(f"{name} cards are:")
     print(f"{cards} (total {total(cards)})")
 
-def print_winner_message(player_cards, dealer_cards, balance, bet):
-    winner = determine_winner(player_cards, dealer_cards)
-    balance = update_player_balance(balance, bet, winner)
+def print_winner_message(winner):
     message = "You win." if winner == "player" else "Dealer wins, you loose."
     print(message)
-    print_balance_message(balance)
-    return balance
 
 def determine_winner(player_cards, dealer_cards):
     if is_bust(player_cards):
@@ -106,9 +102,12 @@ def blackjack(balance):
             if is_bust(dealer_cards):
                 print("Dealer busts.")
 
-    balance = print_winner_message(player_cards, dealer_cards, balance, bet)
+    winner = determine_winner(player_cards, dealer_cards)
+    new_balance = update_player_balance(balance, bet, winner)
+    print_winner_message(winner)
+    print_balance_message(new_balance)
 
-    return balance
+    return new_balance
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_balance = 1000
