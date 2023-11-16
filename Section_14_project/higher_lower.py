@@ -21,6 +21,16 @@ def print_description(choice):
 def print_followers(choice):
     print(f"Followers: {follower_count(choice)}")
 
+def check_correct(guess, followers_1, followers_2):
+    if guess == "h":
+        if followers_1 < followers_2:
+            return True
+        else:
+            return False
+    elif followers_1 > followers_2:
+        return True
+    return False
+
 correct_answers = 0
 keep_playing = True
 choices = random.choices(game_data.data, k=2)
@@ -34,14 +44,7 @@ while keep_playing:
     print_name(choice_2)
     print_description(choice_2)
     guess = input(f"\nDoes {name(choice_2)} have a higher type 'h' or lower type 'l' follower count than {name(choice_1)}:\n")
-    if guess == "h":
-        if follower_count(choice_1) < follower_count(choice_2):
-            print("Correct!")
-            correct_answers += 1
-        else:
-            print("Sorry you loose.")
-            keep_playing = False
-    elif follower_count(choice_1) > follower_count(choice_2):
+    if check_correct(guess, follower_count(choice_1), follower_count(choice_2)):
         print("Correct!")
         correct_answers += 1
     else:
