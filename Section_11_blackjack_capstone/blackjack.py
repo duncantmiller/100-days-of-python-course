@@ -20,6 +20,7 @@
 ## The computer is the dealer.
 
 import random
+import pdb
 
 def deal(number):
     return random.choices(cards, k=number)
@@ -35,7 +36,8 @@ def must_deal(cards):
 
 def deal_and_update_hand(cards):
     cards.append(deal(1)[0])
-    revalue_aces_if_bust(cards)
+    cards = revalue_aces_if_bust(cards)
+    return cards
 
 def print_cards_for(user):
     if user == "dealer":
@@ -63,6 +65,7 @@ def determine_winner():
 def revalue_aces_if_bust(cards):
     if is_bust(cards):
         cards = [1 if card == 11 else card for card in cards]
+    return cards
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_cards = deal(2)
@@ -74,7 +77,7 @@ while keep_dealing:
     print(dealer_cards[1])
     action = input(f"You have  do you want to hit or stay? Type 'h' of 's':\n")
     if action == "h":
-        deal_and_update_hand(player_cards)
+        player_cards = deal_and_update_hand(player_cards)
         print_cards_for("player")
         if is_bust(player_cards):
             keep_dealing = False
@@ -85,7 +88,7 @@ while keep_dealing:
 if not is_bust(player_cards):
     print_cards_for("dealer")
     while must_deal(dealer_cards):
-        deal_and_update_hand(dealer_cards)
+        dealer_cards = deal_and_update_hand(dealer_cards)
         print_cards_for("dealer")
         if is_bust(dealer_cards):
             print("Dealer busts.")
