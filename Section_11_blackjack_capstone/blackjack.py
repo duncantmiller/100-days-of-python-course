@@ -47,11 +47,9 @@ def print_final_message():
     print(message)
 
 def determine_winner():
-    if is_bust(dealer_cards):
-        return "player"
-    elif is_bust(player_cards):
+    if is_bust(player_cards):
         return "dealer"
-    elif total(player_cards) > total(dealer_cards):
+    elif is_bust(dealer_cards) or total(player_cards) > total(dealer_cards):
         return "player"
     else:
         return "dealer"
