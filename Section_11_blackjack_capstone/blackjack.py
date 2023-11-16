@@ -39,22 +39,20 @@ def deal_and_update_hand(cards):
     cards = revalue_aces_if_bust(cards)
     return cards
 
-def print_cards_for(user):
+def print_card_message(user, cards):
     if user == "dealer":
         name = "Dealer"
-        cards = dealer_cards
     else:
         name = "Your"
-        cards = player_cards
     print(f"{name} cards are:")
     print(f"{cards} (total {total(cards)})")
 
-def print_final_message():
-    winner = determine_winner()
+def print_winner_message(player_cards, dealer_cards):
+    winner = determine_winner(player_cards, dealer_cards)
     message = "You win." if winner == "player" else "Dealer wins, you loose."
     print(message)
 
-def determine_winner():
+def determine_winner(player_cards, dealer_cards):
     if is_bust(player_cards):
         return "dealer"
     elif is_bust(dealer_cards) or total(player_cards) > total(dealer_cards):
@@ -67,30 +65,42 @@ def revalue_aces_if_bust(cards):
         cards = [1 if card == 11 else card for card in cards]
     return cards
 
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-player_cards = deal(2)
-dealer_cards = deal(2)
-print_cards_for("player")
-keep_dealing = True
-while keep_dealing:
-    print("Dealer showing")
-    print(dealer_cards[1])
-    action = input(f"You have {total(player_cards)} do you want to hit or stay? Type 'h' of 's':\n")
-    if action == "h":
-        player_cards = deal_and_update_hand(player_cards)
-        print_cards_for("player")
-        if is_bust(player_cards):
+def blackjack():
+    player_cards = deal(2)
+    dealer_cards = deal(2)
+    print_card_message("player", player_cards)
+    keep_dealing = True
+    while keep_dealing:
+        print("Dealer showing")
+        print(dealer_cards[1])
+        action = input(f"You have {total(player_cards)} do you want to hit or stay? Type 'h' of 's':\n")
+        if action == "h":
+            player_cards = deal_and_update_hand(player_cards)
+            print_card_message("player", player_cards)
+            if is_bust(player_cards):
+                keep_dealing = False
+                print("Sorry you bust.")
+        else:
             keep_dealing = False
-            print("Sorry you bust.")
-    else:
-        keep_dealing = False
 
-if not is_bust(player_cards):
-    print_cards_for("dealer")
-    while must_deal(dealer_cards):
-        dealer_cards = deal_and_update_hand(dealer_cards)
-        print_cards_for("dealer")
-        if is_bust(dealer_cards):
-            print("Dealer busts.")
+    if not is_bust(player_cards):
+        print_card_message("dealer", dealer_cards)
+        while must_deal(dealer_cards):
+            dealer_cards = deal_and_update_hand(dealer_cards)
+            print_card_message("player", player_cards)
+            print_card_message("dealer", dealer_cards)
+            if is_bust(dealer_cards):
+                print("Dealer busts.")
 
-print_final_message()
+    print_winner_message(player_cards, dealer_cards)
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+should_play = True
+while should_play:
+    blackjack()
+    should_play_again = input("Do you want to keep playing? Type 'y' of 'n':\n")
+    if should_play_again == "n":
+        should_play = False
+        print("Goodbye it's been a pleasure having you at PyCasino.")
+
