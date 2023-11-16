@@ -31,12 +31,21 @@ def check_correct(guess, followers_1, followers_2):
         return True
     return False
 
+def select_random_choice():
+    return random.choice(game_data.data)
+
+def are_choices_duplicates(choice_1, choice_2):
+    return choice_1 == choice_2
+
 correct_answers = 0
 keep_playing = True
-choices = random.choices(game_data.data, k=2)
-choice_1 = choices[0]
-choice_2 = choices[1]
+choice_1 = select_random_choice()
+choice_2 = select_random_choice()
 while keep_playing:
+    need_new_choices = are_choices_duplicates(choice_1, choice_2)
+    while need_new_choices:
+        choice_2 = select_random_choice()
+        need_new_choices = are_choices_duplicates(choice_1, choice_2)
     print_name(choice_1)
     print_description(choice_1)
     print_followers(choice_1)
@@ -52,4 +61,4 @@ while keep_playing:
         keep_playing = False
     print(f"Correct answers: {correct_answers}\n")
     choice_1 = choice_2
-    choice_2 = random.choice(game_data.data)
+    choice_2 = select_random_choice()
