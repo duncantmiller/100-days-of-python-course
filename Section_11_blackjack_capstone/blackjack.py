@@ -36,11 +36,15 @@ def must_deal(cards):
 def deal_and_update_hand(hand):
     hand.append(deal(1)[0])
 
+def print_cards(cards):
+    user = "Your" if cards == player_cards else "Dealer"
+    print(f"{user} cards are:")
+    print(f"{cards} (total {total(cards)})")
+
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_cards = deal(2)
 dealer_cards = deal(2)
-print("Your cards are:")
-print(f"{player_cards} (total {total(player_cards)})")
+print_cards(player_cards)
 keep_dealing = True
 while keep_dealing:
     print("Dealer showing")
@@ -48,8 +52,7 @@ while keep_dealing:
     action = input(f"You have  do you want to hit or stay? Type 'h' of 's':\n")
     if action == "h":
         deal_and_update_hand(player_cards)
-        print("Your cards are:")
-        print(f"{player_cards} (total {total(player_cards)})")
+        print_cards(player_cards)
         if is_bust(player_cards):
             keep_dealing = False
             print("Sorry you bust.")
@@ -57,13 +60,11 @@ while keep_dealing:
         keep_dealing = False
 
 if not is_bust(player_cards):
-    print("Dealer cards are:")
-    print(f"{dealer_cards} (total {total(dealer_cards)})")
+    print_cards(dealer_cards)
 
     while must_deal(dealer_cards):
         deal_and_update_hand(dealer_cards)
-        print("Dealer cards are:")
-        print(f"{dealer_cards} (total {total(dealer_cards)})")
+        print_cards(dealer_cards)
         if is_bust(dealer_cards):
             print("Dealer busts.")
 
