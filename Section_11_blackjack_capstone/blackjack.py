@@ -41,6 +41,21 @@ def print_cards(cards):
     print(f"{user} cards are:")
     print(f"{cards} (total {total(cards)})")
 
+def print_final_message():
+    winner = determine_winner()
+    message = "You win." if winner == "player" else "Dealer wins, you loose."
+    print(message)
+
+def determine_winner():
+    if is_bust(dealer_cards):
+        return "player"
+    elif is_bust(player_cards):
+        return "dealer"
+    elif total(player_cards) > total(dealer_cards):
+        return "player"
+    else:
+        return "dealer"
+
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_cards = deal(2)
 dealer_cards = deal(2)
@@ -61,18 +76,10 @@ while keep_dealing:
 
 if not is_bust(player_cards):
     print_cards(dealer_cards)
-
     while must_deal(dealer_cards):
         deal_and_update_hand(dealer_cards)
         print_cards(dealer_cards)
         if is_bust(dealer_cards):
             print("Dealer busts.")
 
-if is_bust(dealer_cards):
-    print("You win.")
-elif is_bust(player_cards):
-    print("Dealer wins, you loose.")
-elif total(player_cards) > total(dealer_cards):
-    print("You win.")
-else:
-    print("Dealer wins, you loose.")
+print_final_message()
