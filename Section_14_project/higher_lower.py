@@ -2,8 +2,6 @@ import game_data
 import art
 import random
 
-correct_answers = 0
-
 print(art.logo)
 print("Welcome to the higher lower game. I will give you two choices and you have to tell me which \
       has more followers, if you win you keep going until you loose.")
@@ -11,15 +9,19 @@ print("Welcome to the higher lower game. I will give you two choices and you hav
 def follower_count(choice):
     return choice["follower_count"]
 
+def name(choice):
+    return choice['name']
+
 def print_name(choice):
-    print(f"Name: {choice['name']}")
+    print(f"Name: {name(choice)}")
 
 def print_description(choice):
     print(f"Description: {choice['description']}")
 
 def print_followers(choice):
-    print(f"Followers: {follower_count(choices[0])}")
+    print(f"Followers: {follower_count(choice)}")
 
+correct_answers = 0
 keep_playing = True
 choices = random.choices(game_data.data, k=2)
 choice_1 = choices[0]
@@ -31,7 +33,7 @@ while keep_playing:
     print(art.vs)
     print_name(choice_2)
     print_description(choice_2)
-    guess = input("Higher type 'h' or lower type 'l'?:\n")
+    guess = input(f"\nDoes {name(choice_2)} have a higher type 'h' or lower type 'l' follower count than {name(choice_1)}:\n")
     if guess == "h":
         if follower_count(choice_1) < follower_count(choice_2):
             print("Correct!")
@@ -45,6 +47,6 @@ while keep_playing:
     else:
         print("Sorry you loose.")
         keep_playing = False
-    print(f"Correct answers: {correct_answers}")
+    print(f"Correct answers: {correct_answers}\n")
     choice_1 = choice_2
     choice_2 = random.choice(game_data.data)
