@@ -75,7 +75,7 @@ keep_dealing = True
 while keep_dealing:
     print("Dealer showing")
     print(dealer_cards[1])
-    action = input(f"You have  do you want to hit or stay? Type 'h' of 's':\n")
+    action = input(f"You have {total(player_cards)} do you want to hit or stay? Type 'h' of 's':\n")
     if action == "h":
         player_cards = deal_and_update_hand(player_cards)
         print_cards_for("player")
