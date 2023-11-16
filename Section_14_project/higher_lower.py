@@ -23,14 +23,10 @@ def print_followers(choice):
     print(f"Followers: {follower_count(choice)}")
 
 def check_correct(guess, followers_1, followers_2):
-    if guess == "h":
-        if followers_1 < followers_2:
-            return True
-        else:
-            return False
-    elif followers_1 > followers_2:
-        return True
-    return False
+    if followers_1 < followers_2:
+        return guess == "h"
+    else:
+        return guess == "l"
 
 def select_random_choice():
     return random.choice(game_data.data)
