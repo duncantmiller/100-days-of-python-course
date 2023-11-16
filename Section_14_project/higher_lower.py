@@ -1,6 +1,7 @@
 import game_data
 import art
 import random
+import os
 
 print(art.logo)
 print("Welcome to the higher lower game. I will give you two choices and you have to tell me which \
@@ -37,6 +38,9 @@ def select_random_choice():
 def are_choices_duplicates(choice_1, choice_2):
     return choice_1 == choice_2
 
+def clear():  # Cross-platform clear screen
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 correct_answers = 0
 keep_playing = True
 choice_1 = select_random_choice()
@@ -54,6 +58,7 @@ while keep_playing:
     print_description(choice_2)
     guess = input(f"\nDoes {name(choice_2)} have a higher type 'h' or lower type 'l' follower count than {name(choice_1)}:\n")
     if check_correct(guess, follower_count(choice_1), follower_count(choice_2)):
+        clear()
         print("Correct!")
         correct_answers += 1
     else:
