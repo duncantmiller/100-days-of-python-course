@@ -47,10 +47,13 @@ def print_card_message(user, cards):
     print(f"{name} cards are:")
     print(f"{cards} (total {total(cards)})")
 
-def print_winner_message(player_cards, dealer_cards):
+def print_winner_message(player_cards, dealer_cards, balance, bet):
     winner = determine_winner(player_cards, dealer_cards)
+    balance = update_player_balance(balance, bet, winner)
     message = "You win." if winner == "player" else "Dealer wins, you loose."
     print(message)
+    print_balance_message(balance)
+    return balance
 
 def determine_winner(player_cards, dealer_cards):
     if is_bust(player_cards):
@@ -65,7 +68,18 @@ def revalue_aces_if_bust(cards):
         cards = [1 if card == 11 else card for card in cards]
     return cards
 
-def blackjack():
+def print_balance_message(balance):
+    print(f"Your balance is ${balance}")
+
+def update_player_balance(balance, bet, winner):
+    if winner == "player":
+        balance += bet
+    else:
+        balance -= bet
+    return balance
+
+def blackjack(balance):
+    bet = int(input("How much do you want to bet:\n$"))
     player_cards = deal(2)
     dealer_cards = deal(2)
     print_card_message("player", player_cards)
@@ -92,15 +106,22 @@ def blackjack():
             if is_bust(dealer_cards):
                 print("Dealer busts.")
 
-    print_winner_message(player_cards, dealer_cards)
+    balance = print_winner_message(player_cards, dealer_cards, balance, bet)
+
+    return balance
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+player_balance = 1000
+
+print(f"Welcome to the PyCasino.")
+print_balance_message(player_balance)
 
 should_play = True
 while should_play:
-    blackjack()
+    player_balance = blackjack(player_balance)
+    print_balance_message(player_balance)
     should_play_again = input("Do you want to keep playing? Type 'y' of 'n':\n")
     if should_play_again == "n":
         should_play = False
-        print("Goodbye it's been a pleasure having you at PyCasino.")
+        print(f"Your final balance is {player_balance}. Goodbye it's been a pleasure having you at PyCasino.")
 
