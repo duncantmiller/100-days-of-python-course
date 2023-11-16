@@ -33,12 +33,18 @@ def is_bust(cards):
 def must_deal(cards):
     return total(cards) < 17
 
-def deal_and_update_hand(hand):
-    hand.append(deal(1)[0])
+def deal_and_update_hand(cards):
+    cards.append(deal(1)[0])
+    revalue_aces_if_bust(cards)
 
-def print_cards(cards):
-    user = "Your" if cards == player_cards else "Dealer"
-    print(f"{user} cards are:")
+def print_cards_for(user):
+    if user == "dealer":
+        name = "Dealer"
+        cards = dealer_cards
+    else:
+        name = "Your"
+        cards = player_cards
+    print(f"{name} cards are:")
     print(f"{cards} (total {total(cards)})")
 
 def print_final_message():
@@ -54,10 +60,14 @@ def determine_winner():
     else:
         return "dealer"
 
+def revalue_aces_if_bust(cards):
+    if is_bust(cards):
+        cards = [1 if card == 11 else card for card in cards]
+
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 player_cards = deal(2)
 dealer_cards = deal(2)
-print_cards(player_cards)
+print_cards_for("player")
 keep_dealing = True
 while keep_dealing:
     print("Dealer showing")
@@ -65,7 +75,7 @@ while keep_dealing:
     action = input(f"You have  do you want to hit or stay? Type 'h' of 's':\n")
     if action == "h":
         deal_and_update_hand(player_cards)
-        print_cards(player_cards)
+        print_cards_for("player")
         if is_bust(player_cards):
             keep_dealing = False
             print("Sorry you bust.")
@@ -73,10 +83,10 @@ while keep_dealing:
         keep_dealing = False
 
 if not is_bust(player_cards):
-    print_cards(dealer_cards)
+    print_cards_for("dealer")
     while must_deal(dealer_cards):
         deal_and_update_hand(dealer_cards)
-        print_cards(dealer_cards)
+        print_cards_for("dealer")
         if is_bust(dealer_cards):
             print("Dealer busts.")
 
