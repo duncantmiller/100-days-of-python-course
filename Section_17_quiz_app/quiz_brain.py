@@ -22,14 +22,23 @@ class QuizBrain:
     def current_question(self):
         return self.questions_list[self.question_number]
 
+    def score(self):
+        return f"{self.correct_answers}/{self.question_total()}"
+
     def next_question(self):
         answer = input(
             f"Q.{self.human_question_number()} {self.current_question().text} (True/False): "
         )
-        if self.check_answer(answer):
-            self.increment_correct_answers()
+        self.check_answer(answer)
         self.increment_question_number()
 
     def check_answer(self, answer):
         question = self.current_question()
-        return answer == question.answer
+        if answer.lower() == question.answer.lower():
+            self.increment_correct_answers()
+            print("That's correct!")
+        else:
+            print("That's wrong.")
+        print(f"The correct answer is: {question.answer}")
+        print(f"Your current score is {self.score()}\n")
+

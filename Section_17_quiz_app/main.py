@@ -14,4 +14,4 @@ quiz = QuizBrain(question_bank)
 while quiz.still_has_questions():
     quiz.next_question()
 
-print(f"You scored {quiz.correct_answers}/{quiz.question_total()}")
+print(f"You scored {quiz.score()}")
