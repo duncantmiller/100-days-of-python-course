@@ -19,5 +19,9 @@ def new_order():
         drink = False
         while not drink:
           drink = menu.find_drink(order)
+        if coffee_maker.is_resource_sufficient(drink):
+            coffee_maker.make_coffee(drink)
+        else:
+            print(f"We can't make a {drink.name}. Please try again.")
         new_order()
 new_order()
