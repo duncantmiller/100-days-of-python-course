@@ -1,5 +1,4 @@
-"""for debugging usage: pdb.set_trace()"""
-import pdb
+"""Coffee machine"""
 
 MENU = {
     "espresso": {
@@ -27,6 +26,12 @@ MENU = {
     }
 }
 
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
 def get_price(key):
     """retrieves the cost from the menu dictionary"""
     return MENU[key]["cost"]
@@ -47,39 +52,34 @@ def calculate_change(cost, paid):
     """calculates the change due"""
     return paid - cost
 
-def print_report(resources):
+def print_report(inventory):
     """Prints a report of the resources available"""
-    for resource, amount in resources.items():
+    for resource, amount in inventory.items():
         print(f"{resource}: {amount}")
 
-def are_resources_available_for(key, resources):
+def is_inventory_available_for(key, inventory):
     """return true if there are enough ingredients else return false"""
     for ingredient in MENU[key]["ingredients"]:
-        if MENU[key]["ingredients"][ingredient] > resources[ingredient]:
+        if MENU[key]["ingredients"][ingredient] > inventory[ingredient]:
             return False
     return True
 
-def update_resources_for(key, resources):
+def update_inventory_for(key, inventory):
     """reduces resources by the proper amounts for the order"""
     for ingredient in MENU[key]["ingredients"]:
-        resources[ingredient] -= MENU[key]["ingredients"][ingredient]
-    return resources
+        inventory[ingredient] -= MENU[key]["ingredients"][ingredient]
+    return inventory
 
-def coffee_machine():
+def coffee_machine(inventory):
     """Makes your coffee"""
-    resources = {
-        "water": 300,
-        "milk": 200,
-        "coffee": 100,
-    }
     order = input("Please place your order espresso/latte/cappuccino:\n")
     if order == "report":
-        print_report(resources)
-        coffee_machine()
+        print_report(inventory)
+        coffee_machine(inventory)
     elif order == "shutdown":
         print("Goodbye.")
     else:
-        if are_resources_available_for(order, resources):
+        if is_inventory_available_for(order, inventory):
             order_cost = get_price(order)
             collect_money = True
             while collect_money:
@@ -97,11 +97,11 @@ def coffee_machine():
                     print(f"You only paid {format_dollars(amount_paid)}. I'm returning your money"
                         " please try again")
             change = calculate_change(order_cost, amount_paid)
-            resources = update_resources_for(order, resources)
+            inventory = update_inventory_for(order, inventory)
             print(f"Your change is: {format_dollars(change)}")
             print(f"Here is your {order}. Enjoy!\n")
         else:
             print(f"Sorry I don't have enough ingredients for a {order}. Please try again.\n")
-        coffee_machine()
+        coffee_machine(inventory)
 
-coffee_machine()
+coffee_machine(resources)
