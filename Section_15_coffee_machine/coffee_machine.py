@@ -70,6 +70,14 @@ def update_inventory_for(key, inventory):
         inventory[ingredient] -= MENU[key]["ingredients"][ingredient]
     return inventory
 
+def process_payment():
+    """collects payment and sums coins"""
+    pennies_count = int(input("How many pennies: "))
+    nickels_count = int(input("How many nickels: "))
+    dimes_count = int(input("How many dimes: "))
+    quarters_count = int(input("How many quarters: "))
+    return sum_currency(pennies_count, nickels_count, dimes_count, quarters_count)
+
 def coffee_machine(inventory):
     """Makes your coffee"""
     order = input("Please place your order espresso/latte/cappuccino:\n")
@@ -83,14 +91,8 @@ def coffee_machine(inventory):
             order_cost = get_price(order)
             collect_money = True
             while collect_money:
-                print(f"The cost of a {order} is {format_dollars(order_cost)}")
-                pennies_count = int(input("How many pennies: "))
-                nickels_count = int(input("How many nickels: "))
-                dimes_count = int(input("How many dimes: "))
-                quarters_count = int(input("How many quarters: "))
-                amount_paid = sum_currency(
-                    pennies_count, nickels_count, dimes_count, quarters_count
-                )
+                print(f"An {order} costs {format_dollars(order_cost)}, please insert coins:")
+                amount_paid = process_payment()
                 if has_paid_enough(order_cost, amount_paid):
                     collect_money = False
                 else:
