@@ -10,30 +10,39 @@ def format_dollars(amount):
     """returns a string formatted in dollars $xx.xx"""
     return f"${amount:,.2f}"
 
-def collect_funds_and_make(drink):
+def make_if_funds_collected(drink):
     if money_machine.make_payment(drink.cost):
         coffee_maker.make_coffee(drink)
 
-def process_order(drink):
+def collect_funds_and_make(drink):
     if coffee_maker.is_resource_sufficient(drink):
         print(f"A latte costs {format_dollars(drink.cost)}")
-        collect_funds_and_make(drink)
+        make_if_funds_collected(drink)
     else:
         print(f"We can't make a {drink.name}. Please try again.")
+
+def process(order):
+    drink = False
+    while not drink:
+      drink = menu.find_drink(order)
+    collect_funds_and_make(drink)
+    new_order()
+
+def print_report():
+    coffee_maker.report()
+    new_order()
+
+def shutdown():
+    print("Goodbye.")
 
 def new_order():
     print("\nWelcome to the coffee machine.")
     order = input(f"Please place your order ({menu.get_items()})\n")
     if order == "report":
-        coffee_maker.report()
-        new_order()
+        print_report()
     elif order == "shutdown":
-        print("Goodbye.")
+        shutdown()
     else:
-        drink = False
-        while not drink:
-          drink = menu.find_drink(order)
-        process_order(drink)
-        new_order()
+        process(order)
 
 new_order()
