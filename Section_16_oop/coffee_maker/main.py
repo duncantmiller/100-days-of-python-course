@@ -28,8 +28,9 @@ def process(order):
     collect_funds_and_make(drink)
     new_order()
 
-def print_report():
+def print_reports():
     coffee_maker.report()
+    money_machine.report()
     new_order()
 
 def shutdown():
@@ -39,7 +40,7 @@ def new_order():
     print("\nWelcome to the coffee machine.")
     order = input(f"Please place your order ({menu.get_items()})\n")
     if order == "report":
-        print_report()
+        print_reports()
     elif order == "shutdown":
         shutdown()
     else:
