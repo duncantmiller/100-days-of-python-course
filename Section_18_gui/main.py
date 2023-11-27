@@ -37,6 +37,16 @@ def random_walk():
         mertle.right(random.choice(directions))
         mertle.forward(25)
 
+def draw_spirograph(gap_size):
+    """Draw a series of circles in a circle"""
+    for _ in range(int(360 / gap_size)):
+        mertle.setheading(gap_size + mertle.heading())
+        color = random_color()
+        mertle.pencolor(color)
+        mertle.circle(50)
+
 # draw_shapes()
-random_walk()
+# random_walk()
+mertle.speed(0)
+draw_spirograph(10)
 screen.exitonclick()
