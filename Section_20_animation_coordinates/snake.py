@@ -11,6 +11,22 @@ class Snake:
         for _ in range(3):
             self.add_link()
 
+    def up(self):
+        """Turn first link up"""
+        self.links[0].setheading(90)
+
+    def down(self):
+        """Turn first link down"""
+        self.links[0].setheading(270)
+
+    def left(self):
+        """Turn first link left"""
+        self.links[0].setheading(180)
+
+    def right(self):
+        """Turn first link right"""
+        self.links[0].setheading(0)
+
     def add_link(self):
         """adds a new snake link"""
         link = Turtle()
