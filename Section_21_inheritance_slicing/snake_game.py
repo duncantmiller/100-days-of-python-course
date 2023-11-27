@@ -31,4 +31,8 @@ while is_game_on:
         snake.add_link()
         scoreboard.increment_score()
 
+    if snake.is_over_x() or snake.is_over_y():
+        is_game_on = False
+        scoreboard.print_game_over()
+
 screen.exitonclick()

@@ -37,6 +37,16 @@ class Snake:
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
 
+    def is_over_x(self):
+        """crossed horizontal boundary"""
+        is_over = self.head.xcor() > 280 or self.head.xcor() < -280
+        return is_over
+
+    def is_over_y(self):
+        """crossed vertical boundary"""
+        is_over = self.head.ycor() > 280 or self.head.ycor() < - 280
+        return is_over
+
     def add_link(self):
         """adds a new snake link"""
         link = Turtle()
