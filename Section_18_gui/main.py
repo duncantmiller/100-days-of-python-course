@@ -1,11 +1,18 @@
 """turtle graphics"""
-from turtle import Turtle, Screen
+from turtle import Screen
+import turtle as t
 import random
 
-mertle = Turtle()
+mertle = t.Turtle()
 screen = Screen()
-
+t.colormode(255)
 mertle.shape("turtle")
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return (r, g, b)
 
 def draw_shape(number, color):
     """draw individual shape"""
@@ -25,13 +32,11 @@ def random_walk():
     directions = [0, 90, 180, 270]
     mertle.pensize(10)
     for _ in range(50):
-        color = random.choice(colors)
+        color = random_color()
         mertle.pencolor(color)
         mertle.right(random.choice(directions))
         mertle.forward(25)
 
-
-colors = ["red", "green", "blue", "yellow", "black", "indigo", "violet", "orange", "pink", "cyan"]
 # draw_shapes()
 random_walk()
 screen.exitonclick()
