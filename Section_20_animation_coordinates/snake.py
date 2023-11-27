@@ -5,9 +5,9 @@ class Snake:
 
     def __init__(self):
         self.links = []
-        self.create_snake()
+        self._create_snake()
 
-    def create_snake(self):
+    def _create_snake(self):
         for _ in range(3):
             self.add_link()
 
