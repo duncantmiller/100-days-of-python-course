@@ -1,3 +1,8 @@
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
 from turtle import Turtle
 
 class Snake:
@@ -6,6 +11,7 @@ class Snake:
     def __init__(self):
         self.links = []
         self._create_snake()
+        self.head = self.links[0]
 
     def _create_snake(self):
         for _ in range(3):
@@ -13,19 +19,23 @@ class Snake:
 
     def up(self):
         """Turn first link up"""
-        self.links[0].setheading(90)
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
 
     def down(self):
         """Turn first link down"""
-        self.links[0].setheading(270)
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
 
     def left(self):
         """Turn first link left"""
-        self.links[0].setheading(180)
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
 
     def right(self):
         """Turn first link right"""
-        self.links[0].setheading(0)
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
 
     def add_link(self):
         """adds a new snake link"""
@@ -48,4 +58,4 @@ class Snake:
         for link_number in range(len(links) - 1, 0, -1):
             last_coordinates = links[link_number - 1].position()
             links[link_number].goto(last_coordinates)
-        links[0].forward(20)
+        self.head.forward(20)
