@@ -35,4 +35,9 @@ while is_game_on:
         is_game_on = False
         scoreboard.print_game_over()
 
+    for link in snake.links:
+        if link != snake.head and snake.head.distance(link) < 10:
+            is_game_on = False
+            scoreboard.print_game_over()
+
 screen.exitonclick()
