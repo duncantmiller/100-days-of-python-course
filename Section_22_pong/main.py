@@ -28,16 +28,20 @@ while is_game_on:
     screen.update()
     time.sleep(0.1)
 
+    for link in paddle.links:
+        if link.distance(ball) < 15:
+            ball.bounce_left()
+
     if ball.ycor() > 300:
         ball.bounce_down()
     elif ball.ycor() < -300:
         ball.bounce_up()
-
-    if ball.xcor() > 400:
+    elif ball.xcor() > 400:
         right_score.increment_points()
         ball.serve_left()
     elif ball.xcor() < -400:
         left_score.increment_points()
         ball.serve_right()
+
 
 screen.exitonclick()
