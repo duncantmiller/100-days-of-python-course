@@ -11,7 +11,7 @@ class Ball(Turtle):
         self.shape("circle")
         self.penup()
 
-    def set_random_heading_right(self):
+    def set_serve_heading(self):
         """set a random angle heading to the right"""
         self.setheading(random.randint(-45, 45))
 

@@ -16,7 +16,7 @@ screen.tracer(0)
 paddle = Paddle()
 ball = Ball()
 
-ball.set_random_heading_right()
+ball.set_serve_heading()
 
 screen.listen()
 screen.onkey(paddle.up, "Up")
