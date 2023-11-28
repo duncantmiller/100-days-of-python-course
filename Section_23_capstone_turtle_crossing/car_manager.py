@@ -20,6 +20,7 @@ class CarManager:
             if random.choice([1, 2, 3, 4]) == 1:
                 car = Turtle()
                 car.shape("square")
+                car.shapesize(stretch_wid=1, stretch_len=2)
                 car.color(random.choice(COLORS))
                 car.penup()
                 car.setpos(280, y_coordinate)
