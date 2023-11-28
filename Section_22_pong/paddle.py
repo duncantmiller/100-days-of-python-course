@@ -2,24 +2,17 @@
 from turtle import Turtle
 
 LINK_SIZE = 20
-PADDLE_LINKS = 5
 
-class Paddle():
+class Paddle(Turtle):
     """Paddle class"""
 
     def __init__(self):
-        self.links = []
-        self._make_links()
+        super().__init__()
+        self.shape("square")
+        self.color("white")
+        self.shapesize(stretch_wid=5, stretch_len=1)
+        self.penup()
         self.reset_paddle()
-
-    def _make_links(self):
-        """builds the links"""
-        for _ in range(PADDLE_LINKS):
-            link = Turtle()
-            link.shape("square")
-            link.color("white")
-            self.links.append(link)
-            link.penup()
 
     def up(self):
         """move paddle up 1"""
@@ -31,10 +24,8 @@ class Paddle():
 
     def _move_paddle(self, amount):
         """move paddle by amount"""
-        for link in self.links:
-            link.sety(link.ycor() + (amount * LINK_SIZE))
+        self.sety(self.ycor() + (amount * LINK_SIZE))
 
     def reset_paddle(self):
         """set paddle at home position"""
-        for index, link in enumerate(self.links):
-            link.setpos(350, 40 - (index * LINK_SIZE))
+        self.goto(350, 0)

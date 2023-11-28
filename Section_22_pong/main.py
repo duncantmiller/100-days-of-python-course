@@ -28,9 +28,8 @@ while is_game_on:
     screen.update()
     time.sleep(0.1)
 
-    for link in paddle.links:
-        if link.distance(ball) < 15:
-            ball.bounce_left()
+    if paddle.distance(ball) < 15:
+        ball.bounce_left()
 
     if ball.ycor() > 300:
         ball.bounce_down()
