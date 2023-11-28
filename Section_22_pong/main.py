@@ -13,7 +13,8 @@ screen.tracer(0)
 
 paddle = Paddle()
 ball = Ball()
-scoreboard = Scoreboard()
+right_score = Scoreboard("right")
+left_score = Scoreboard("left")
 
 ball.serve_right()
 
@@ -25,7 +26,7 @@ is_game_on = True
 while is_game_on:
     ball.move()
     screen.update()
-    time.sleep(0.2)
+    time.sleep(0.1)
 
     if ball.ycor() > 300:
         ball.bounce_down()
@@ -33,10 +34,10 @@ while is_game_on:
         ball.bounce_up()
 
     if ball.xcor() > 400:
-        scoreboard.point_right()
+        right_score.increment_points()
         ball.serve_left()
     elif ball.xcor() < -400:
-        scoreboard.point_left()
+        left_score.increment_points()
         ball.serve_right()
 
 screen.exitonclick()
