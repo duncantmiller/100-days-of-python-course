@@ -6,7 +6,6 @@ class Paddle():
     def __init__(self):
         self.links = []
         self._make_links()
-        self.head = self.links[0]
         self.reset_paddle()
 
     def _make_links(self):
