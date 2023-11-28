@@ -10,7 +10,7 @@ class Paddle():
 
     def _make_links(self):
         """builds the links"""
-        for index in range(5):
+        for _ in range(5):
             link = Turtle()
             link.shape("square")
             link.color("white")
