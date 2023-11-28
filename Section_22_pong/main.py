@@ -39,13 +39,17 @@ while is_game_on:
         ball.bounce_y()
     elif ball.xcor() > 380:
         right_score.increment_points()
-        ball.serve_left()
+        if right_score.score == 7:
+            right_score.print_game_over()
+            is_game_on = False
+        else:
+            ball.serve_left()
     elif ball.xcor() < -380:
         left_score.increment_points()
-        ball.serve_right()
-
-    if right_score.score == 7 or left_score.score == 7:
-        right_score.print_game_over()
-        is_came_on = False
+        if left_score.score == 7:
+            left_score.print_game_over()
+            is_game_on = False
+        else:
+            ball.serve_right()
 
 screen.exitonclick()
