@@ -1,6 +1,7 @@
 """pong"""
 from turtle import Screen
 from paddle import Paddle
+from ball import Ball
 # from scoreboard import Scoreboard
 import time
 
@@ -13,6 +14,7 @@ screen.tracer(0)
 # scoreboard = Scoreboard()
 
 paddle = Paddle()
+ball = Ball()
 
 screen.listen()
 screen.onkey(paddle.up, "Up")
