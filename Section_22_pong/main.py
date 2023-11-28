@@ -2,7 +2,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
-# from scoreboard import Scoreboard
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -11,12 +11,11 @@ screen.bgcolor("black")
 screen.title("Field Pong")
 screen.tracer(0)
 
-# scoreboard = Scoreboard()
-
 paddle = Paddle()
 ball = Ball()
+scoreboard = Scoreboard()
 
-ball.set_serve_heading()
+ball.serve_right()
 
 screen.listen()
 screen.onkey(paddle.up, "Up")
@@ -27,5 +26,17 @@ while is_game_on:
     ball.move()
     screen.update()
     time.sleep(0.2)
+
+    if ball.ycor() > 300:
+        ball.bounce_down()
+    elif ball.ycor() < -300:
+        ball.bounce_up()
+
+    if ball.xcor() > 400:
+        scoreboard.point_right()
+        ball.serve_left()
+    elif ball.xcor() < -400:
+        scoreboard.point_left()
+        ball.serve_right()
 
 screen.exitonclick()
