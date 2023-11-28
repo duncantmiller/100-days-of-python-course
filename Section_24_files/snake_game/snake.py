@@ -13,6 +13,13 @@ class Snake:
         self._create_snake()
         self.head = self.links[0]
 
+    def reset(self):
+        for link in self.links:
+            link.goto(1000, 1000)
+        self.links.clear()
+        self._create_snake()
+        self.head = self.links[0]
+
     def _create_snake(self):
         for _ in range(3):
             self.add_link()

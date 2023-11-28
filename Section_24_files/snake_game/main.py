@@ -32,12 +32,12 @@ while is_game_on:
         scoreboard.increment_score()
 
     if snake.is_over_x() or snake.is_over_y():
-        is_game_on = False
-        scoreboard.print_game_over()
+        scoreboard.reset()
+        snake.reset()
 
     for link in snake.links[1:]:
         if snake.head.distance(link) < 5:
-            is_game_on = False
-            scoreboard.print_game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
