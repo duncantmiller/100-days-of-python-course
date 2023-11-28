@@ -16,12 +16,15 @@ screen.tracer(0)
 paddle = Paddle()
 ball = Ball()
 
+ball.set_random_heading_right()
+
 screen.listen()
 screen.onkey(paddle.up, "Up")
 screen.onkey(paddle.down, "Down")
 
 is_game_on = True
 while is_game_on:
+    ball.move()
     screen.update()
     time.sleep(0.2)
 
