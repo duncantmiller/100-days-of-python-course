@@ -10,33 +10,35 @@ class Ball(Turtle):
         self.color("white")
         self.shape("circle")
         self.penup()
+        self.x_move = 2
+        self.y_move = 2
+        self.move_speed = 0.1
 
     def serve_right(self):
         """set a random angle heading to the right"""
         self.setpos(0, 0)
+        self.move_speed = 0.1
         self.setheading(random.randint(-45, 45))
+        self.forward(10)
 
     def serve_left(self):
         """set a random angle heading to the right"""
         self.setpos(0, 0)
+        self.move_speed = 0.1
         self.setheading(random.randint(135, 225))
+        self.forward(10)
 
     def move(self):
         """move forward"""
-        self.forward(10)
+        new_x = self.xcor() + self.x_move
+        new_y = self.ycor() + self.y_move
+        self.goto(new_x, new_y)
 
-    def bounce_down(self):
-        """calculate bounce heading down"""
-        self.setheading(self.heading() - 90)
+    def bounce_y(self):
+        """calculate bounce up/down"""
+        self.y_move *= -1
 
-    def bounce_up(self):
-        """calculate bounce heading up"""
-        self.setheading(self.heading() + 90)
-
-    def bounce_left(self):
-        """calculate bounce heading left"""
-        self.setheading(self.heading() - 270)
-
-    def bounce_right(self):
-        """calculate bounce heading right"""
-        self.setheading(self.heading() + 270)
+    def bounce_x(self):
+        """calculate bounce right/left"""
+        self.x_move *= -1
+        self.move_speed *= 0.9

@@ -29,17 +29,14 @@ is_game_on = True
 while is_game_on:
     ball.move()
     screen.update()
-    time.sleep(0.1)
 
     if ball.xcor() > 330 and right_paddle.distance(ball) < 50:
-        ball.bounce_left()
+        ball.bounce_x()
     if ball.xcor() < -330 and left_paddle.distance(ball) < 50:
-        ball.bounce_right()
+        ball.bounce_x()
 
-    if ball.ycor() > 280:
-        ball.bounce_down()
-    elif ball.ycor() < -280:
-        ball.bounce_up()
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce_y()
     elif ball.xcor() > 380:
         right_score.increment_points()
         ball.serve_left()
