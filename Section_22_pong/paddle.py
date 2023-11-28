@@ -1,3 +1,4 @@
+"""import turtle"""
 from turtle import Turtle
 
 LINK_SIZE = 20
