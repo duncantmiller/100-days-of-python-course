@@ -25,6 +25,11 @@ screen.onkey(right_paddle.down, "Down")
 screen.onkey(left_paddle.up, "w")
 screen.onkey(left_paddle.down, "s")
 
+def reset_positions(right_paddle, left_paddle):
+    """resets paddle positions"""
+    right_paddle.reset_paddle("right")
+    left_paddle.reset_paddle("left")
+
 is_game_on = True
 while is_game_on:
     ball.move()
@@ -45,6 +50,7 @@ while is_game_on:
             right_score.print_game_over()
             is_game_on = False
         else:
+            reset_positions(right_paddle, left_paddle)
             ball.serve_left()
     elif ball.xcor() < -380:
         left_score.increment_points()
@@ -52,6 +58,7 @@ while is_game_on:
             left_score.print_game_over()
             is_game_on = False
         else:
+            reset_positions(right_paddle, left_paddle)
             ball.serve_right()
 
 screen.exitonclick()
