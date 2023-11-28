@@ -22,7 +22,15 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     car_manager.move_cars()
+    car_manager.add_row_of_cars()
 
     if player.has_crossed_finish():
         scoreboard.increment_level()
         player.reset_position()
+
+    for car in car_manager.cars:
+        if car.distance(player) < 15:
+            game_is_on = False
+            scoreboard.print_game_over()
+
+screen.exitonclick()
