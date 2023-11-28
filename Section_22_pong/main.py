@@ -11,8 +11,8 @@ screen.bgcolor("black")
 screen.title("Field Pong")
 screen.tracer(0)
 
-right_paddle = Paddle("right")
-left_paddle = Paddle("left")
+right_paddle = Paddle(350)
+left_paddle = Paddle(-350)
 ball = Ball()
 right_score = Scoreboard("right")
 left_score = Scoreboard("left")
@@ -26,21 +26,14 @@ screen.onkey(left_paddle.up, "w")
 screen.onkey(left_paddle.down, "s")
 
 def reset_positions(right_paddle, left_paddle):
-    """resets paddle positions"""
-    right_paddle.reset_paddle("right")
-    left_paddle.reset_paddle("left")
+    """calls paddle resets"""
+    right_paddle.reset_paddle()
+    left_paddle.reset_paddle()
 
 is_game_on = True
 while is_game_on:
     ball.move()
     screen.update()
-
-    for link in right_paddle.links:
-        if link.distance(ball) < 15:
-            ball.bounce_x()
-    for link in left_paddle.links:
-        if link.distance(ball) < 15:
-            ball.bounce_x()
 
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce_y()
@@ -60,5 +53,18 @@ while is_game_on:
         else:
             reset_positions(right_paddle, left_paddle)
             ball.serve_right()
+
+    for link in right_paddle.links:
+        if link.distance(ball) < 20:
+            ball.bounce_x()
+            break
+    for link in left_paddle.links:
+        if link.distance(ball) < 20:
+            ball.bounce_x()
+            break
+
+    if ball.hits != 0 and ball.hits % 10 == 0:
+        left_paddle.shrink()
+        right_paddle.shrink()
 
 screen.exitonclick()

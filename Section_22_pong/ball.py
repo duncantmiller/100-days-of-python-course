@@ -13,6 +13,7 @@ class Ball(Turtle):
         self.x_move = 2
         self.y_move = 2
         self.move_speed = 0.1
+        self.hits = 0
 
     def serve_right(self):
         """set a random angle heading to the right"""
@@ -42,3 +43,4 @@ class Ball(Turtle):
         """calculate bounce right/left"""
         self.x_move *= -1
         self.move_speed *= 0.9
+        self.hits += 1
