@@ -8,6 +8,7 @@ class Scoreboard(Turtle):
         self.score = 0
         self.color("white")
         self.hideturtle()
+        self.penup()
         self.set_position(side)
         self._print_score()
 

@@ -44,4 +44,8 @@ while is_game_on:
         left_score.increment_points()
         ball.serve_right()
 
+    if right_score.score == 7 or left_score.score == 7:
+        right_score.print_game_over()
+        is_came_on = False
+
 screen.exitonclick()
