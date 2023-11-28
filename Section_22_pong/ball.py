@@ -36,3 +36,7 @@ class Ball(Turtle):
     def bounce_left(self):
         """calculate bounce heading left"""
         self.setheading(self.heading() - 270)
+
+    def bounce_right(self):
+        """calculate bounce heading right"""
+        self.setheading(self.heading() + 270)

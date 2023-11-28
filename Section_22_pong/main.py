@@ -11,7 +11,8 @@ screen.bgcolor("black")
 screen.title("Field Pong")
 screen.tracer(0)
 
-paddle = Paddle()
+right_paddle = Paddle("right")
+left_paddle = Paddle("left")
 ball = Ball()
 right_score = Scoreboard("right")
 left_score = Scoreboard("left")
@@ -19,8 +20,10 @@ left_score = Scoreboard("left")
 ball.serve_right()
 
 screen.listen()
-screen.onkey(paddle.up, "Up")
-screen.onkey(paddle.down, "Down")
+screen.onkey(right_paddle.up, "Up")
+screen.onkey(right_paddle.down, "Down")
+screen.onkey(left_paddle.up, "w")
+screen.onkey(left_paddle.down, "s")
 
 is_game_on = True
 while is_game_on:
@@ -28,8 +31,10 @@ while is_game_on:
     screen.update()
     time.sleep(0.1)
 
-    if paddle.distance(ball) < 15:
+    if right_paddle.distance(ball) < 15:
         ball.bounce_left()
+    if left_paddle.distance(ball) < 15:
+        ball.bounce_right()
 
     if ball.ycor() > 300:
         ball.bounce_down()
