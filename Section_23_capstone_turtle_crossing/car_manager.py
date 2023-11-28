@@ -16,13 +16,13 @@ class CarManager:
 
     def add_row_of_cars(self):
         """randomly add rows of cars"""
-        if random.choice(range(10)) == 1:
+        if random.choice(range(11)) == 1:
             self.generate_cars()
 
     def generate_cars(self):
         """create a row of cars"""
-        for y_coordinate in range(-220, 250, 20):
-            if random.choice(range(8)) == 1:
+        for y_coordinate in range(-220, 250, 10):
+            if random.choice(range(20)) == 1:
                 car = Turtle()
                 car.shape("square")
                 car.shapesize(stretch_wid=1, stretch_len=2)
@@ -35,3 +35,7 @@ class CarManager:
         """move all the cars"""
         for car in self.cars:
             car.setx(car.xcor() - self.move_distance)
+
+    def increase_speed(self):
+        """increase speed"""
+        self.move_distance += MOVE_INCREMENT

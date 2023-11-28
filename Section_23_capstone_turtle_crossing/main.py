@@ -26,6 +26,7 @@ while game_is_on:
 
     if player.has_crossed_finish():
         scoreboard.increment_level()
+        car_manager.increase_speed()
         player.reset_position()
 
     for car in car_manager.cars:
