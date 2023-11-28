@@ -18,15 +18,15 @@ class Ball(Turtle):
         """set a random angle heading to the right"""
         self.setpos(0, 0)
         self.move_speed = 0.1
-        self.setheading(random.randint(-45, 45))
-        self.forward(10)
+        self.x_move *= random.uniform(-1, -0.5)
+        self.y_move *= random.choice([-1, 1])
 
     def serve_left(self):
         """set a random angle heading to the right"""
         self.setpos(0, 0)
         self.move_speed = 0.1
-        self.setheading(random.randint(135, 225))
-        self.forward(10)
+        self.x_move *= random.uniform(-1, -0.5)
+        self.y_move *= random.choice([-1, 1])
 
     def move(self):
         """move forward"""
