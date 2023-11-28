@@ -7,6 +7,7 @@ class Paddle():
         self.links = []
         self._make_links()
         self.head = self.links[0]
+        self.reset_paddle()
 
     def _make_links(self):
         """builds the links"""
@@ -16,7 +17,6 @@ class Paddle():
             link.color("white")
             self.links.append(link)
             link.penup()
-            link.setpos(350, 40 - (index * 20))
 
     def up(self):
         """move paddle up 1"""
@@ -30,3 +30,8 @@ class Paddle():
         """move paddle by amount"""
         for link in self.links:
             link.sety(link.ycor() + (amount * 20))
+
+    def reset_paddle(self):
+        """set paddle at home position"""
+        for index, link in enumerate(self.links):
+            link.setpos(350, 40 - (index * 20))
