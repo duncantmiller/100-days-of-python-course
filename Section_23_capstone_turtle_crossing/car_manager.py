@@ -16,8 +16,8 @@ class CarManager:
 
     def generate_cars(self):
         """create a row of cars"""
-        for y_coordinate in range(-220, 250, 15):
-            if random.choice([1, 2, 3]) == 1:
+        for y_coordinate in range(-220, 250, 20):
+            if random.choice([1, 2, 3, 4]) == 1:
                 car = Turtle()
                 car.shape("square")
                 car.color(random.choice(COLORS))
