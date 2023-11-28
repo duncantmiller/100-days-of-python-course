@@ -30,3 +30,7 @@ class Player(Turtle):
     def move_right(self):
         """move right"""
         self.setx(self.xcor() + MOVE_DISTANCE)
+
+    def has_crossed_finish(self):
+        """check if crossed finish line"""
+        return self.ycor() > FINISH_LINE_Y

@@ -20,3 +20,7 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+
+    if player.has_crossed_finish():
+        scoreboard.increment_level()
+        player.reset_position()
