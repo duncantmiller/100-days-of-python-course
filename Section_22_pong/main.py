@@ -69,10 +69,14 @@ def bounce_if_hits_right_paddle(ball, right_paddle, left_paddle):
             if link.distance(ball) < 15:
                 ball.bounce_x()
                 ball.set_last_hit("right")
-                if ball.hits != 0 and ball.hits % 10 == 0:
-                    left_paddle.shrink()
-                    right_paddle.shrink()
+                shrink_if_needed(ball.hits, left_paddle, right_paddle)
                 break
+
+def shrink_if_needed(hits, left_paddle, right_paddle):
+    """shrink paddles if hits multiple of 10"""
+    if hits != 0 and hits % 10 == 0:
+        left_paddle.shrink()
+        right_paddle.shrink()
 
 def bounce_if_hits_left_paddle(ball, right_paddle, left_paddle):
     """bounce if hits left paddle"""
@@ -81,9 +85,7 @@ def bounce_if_hits_left_paddle(ball, right_paddle, left_paddle):
             if link.distance(ball) < 15:
                 ball.bounce_x()
                 ball.set_last_hit("left")
-                if ball.hits != 0 and ball.hits % 10 == 0:
-                    left_paddle.shrink()
-                    right_paddle.shrink()
+                shrink_if_needed(ball.hits, left_paddle, right_paddle)
                 break
 
 is_game_on = True
