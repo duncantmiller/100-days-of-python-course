@@ -14,8 +14,7 @@ writer.penup()
 states_data = pandas.read_csv("50_states.csv")
 score = 0
 correct_guesses = []
-is_game_on = True
-while is_game_on:
+while len(correct_guesses < 50):
     answer = screen.textinput(
         title=f"Score: {score}/50: Guess the State", prompt="What's another state name?"
     ).title()
