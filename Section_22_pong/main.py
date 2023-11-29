@@ -8,7 +8,7 @@ import time
 screen = Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
-screen.title("Field Pong")
+screen.title("Simone Pong")
 screen.tracer(0)
 
 right_paddle = Paddle(350)
@@ -54,17 +54,23 @@ while is_game_on:
             reset_positions(right_paddle, left_paddle)
             ball.serve_right()
 
-    for link in right_paddle.links:
-        if link.distance(ball) < 20:
-            ball.bounce_x()
-            break
-    for link in left_paddle.links:
-        if link.distance(ball) < 20:
-            ball.bounce_x()
-            break
-
-    if ball.hits != 0 and ball.hits % 10 == 0:
-        left_paddle.shrink()
-        right_paddle.shrink()
+    if ball.was_last_hit_left():
+        for link in right_paddle.links:
+            if link.distance(ball) < 15:
+                ball.bounce_x()
+                ball.set_last_hit("right")
+                if ball.hits != 0 and ball.hits % 10 == 0:
+                    left_paddle.shrink()
+                    right_paddle.shrink()
+                break
+    if ball.was_last_hit_right():
+        for link in left_paddle.links:
+            if link.distance(ball) < 15:
+                ball.bounce_x()
+                ball.set_last_hit("left")
+                if ball.hits != 0 and ball.hits % 10 == 0:
+                    left_paddle.shrink()
+                    right_paddle.shrink()
+                break
 
 screen.exitonclick()
