@@ -55,13 +55,6 @@ def score_left_if_cross_right_goal():
             reset_positions()
             ball.serve_right()
 
-def check_for_winner():
-    """check if there is a winner"""
-    if left_score.score == 7 or right_score.score == 7:
-        left_score.print_game_over()
-        return False
-    return True
-
 def bounce_if_hits_right_paddle():
     """bounce if hits right paddle"""
     if ball.was_last_hit_left():
@@ -71,12 +64,6 @@ def bounce_if_hits_right_paddle():
                 ball.set_last_hit("right")
                 shrink_if_needed()
                 break
-
-def shrink_if_needed():
-    """shrink paddles if hits multiple of 10"""
-    if ball.hits != 0 and ball.hits % 10 == 0:
-        left_paddle.shrink()
-        right_paddle.shrink()
 
 def bounce_if_hits_left_paddle():
     """bounce if hits left paddle"""
@@ -88,16 +75,28 @@ def bounce_if_hits_left_paddle():
                 shrink_if_needed()
                 break
 
+def shrink_if_needed():
+    """shrink paddles if hits multiple of 10"""
+    if ball.hits != 0 and ball.hits % 10 == 0:
+        left_paddle.shrink()
+        right_paddle.shrink()
+
+def check_for_winner():
+    """check if there is a winner"""
+    if left_score.score == 7 or right_score.score == 7:
+        left_score.print_game_over()
+        return False
+    return True
+
 is_game_on = True
 while is_game_on:
     ball.move()
     screen.update()
-
     bounce_if_hits_side()
     score_right_if_cross_left_goal()
     score_left_if_cross_right_goal()
-    is_game_on = check_for_winner()
     bounce_if_hits_right_paddle()
     bounce_if_hits_left_paddle()
 
+    is_game_on = check_for_winner()
 screen.exitonclick()
