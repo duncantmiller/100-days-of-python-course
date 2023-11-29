@@ -22,7 +22,7 @@ class Ball(Turtle):
         self.move_speed = 0.1
         self.x_move *= random.uniform(-1, -0.9)
         self.y_move *= random.choice([-1, 1])
-        self.set_last_hit("left")
+        self.set_last_hit("right")
 
     def serve_left(self):
         """set a random angle heading to the right"""
@@ -30,7 +30,7 @@ class Ball(Turtle):
         self.move_speed = 0.1
         self.x_move *= random.uniform(-1, -0.9)
         self.y_move *= random.choice([-1, 1])
-        self.set_last_hit("right")
+        self.set_last_hit("left")
 
     def move(self):
         """move forward"""

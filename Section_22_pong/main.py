@@ -30,30 +30,40 @@ def reset_positions(right_paddle, left_paddle):
     right_paddle.reset_paddle()
     left_paddle.reset_paddle()
 
-is_game_on = True
-while is_game_on:
-    ball.move()
-    screen.update()
-
+def bounce_if_hits_side(ball):
+    """check if the ball is over the y edge and bounce"""
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce_y()
-    elif ball.xcor() > 380:
+
+def score_right_if_cross_left_goal(ball, right_score, right_paddle, left_paddle):
+    """check if passed left goal"""
+    if ball.xcor() < -380:
         right_score.increment_points()
         if right_score.score == 7:
             right_score.print_game_over()
-            is_game_on = False
         else:
             reset_positions(right_paddle, left_paddle)
             ball.serve_left()
-    elif ball.xcor() < -380:
+
+def score_left_if_cross_right_goal(ball, left_score, right_paddle, left_paddle):
+    """check if passed right goal"""
+    if ball.xcor() > 380:
         left_score.increment_points()
         if left_score.score == 7:
             left_score.print_game_over()
-            is_game_on = False
         else:
             reset_positions(right_paddle, left_paddle)
             ball.serve_right()
 
+def check_for_winner(right_score, left_score):
+    """check if there is a winner"""
+    if left_score.score == 7 or right_score.score == 7:
+        left_score.print_game_over()
+        return False
+    return True
+
+def bounce_if_hits_right_paddle(ball, right_paddle, left_paddle):
+    """bounce if hits right paddle"""
     if ball.was_last_hit_left():
         for link in right_paddle.links:
             if link.distance(ball) < 15:
@@ -63,6 +73,9 @@ while is_game_on:
                     left_paddle.shrink()
                     right_paddle.shrink()
                 break
+
+def bounce_if_hits_left_paddle(ball, right_paddle, left_paddle):
+    """bounce if hits left paddle"""
     if ball.was_last_hit_right():
         for link in left_paddle.links:
             if link.distance(ball) < 15:
@@ -72,5 +85,17 @@ while is_game_on:
                     left_paddle.shrink()
                     right_paddle.shrink()
                 break
+
+is_game_on = True
+while is_game_on:
+    ball.move()
+    screen.update()
+
+    bounce_if_hits_side(ball)
+    score_right_if_cross_left_goal(ball, right_score, right_paddle, left_paddle)
+    score_left_if_cross_right_goal(ball, left_score, right_paddle, left_paddle)
+    is_game_on = check_for_winner(right_score, left_score)
+    bounce_if_hits_right_paddle(ball, right_paddle, left_paddle)
+    bounce_if_hits_left_paddle(ball, right_paddle, left_paddle)
 
 screen.exitonclick()
