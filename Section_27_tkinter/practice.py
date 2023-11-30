@@ -8,9 +8,13 @@ label = tkinter.Label(text="Label 1", font=("Arial", 24, "bold"))
 label.pack()
 
 def button_clicked():
-    label.config(text="I got clicked")
+    text = field.get()
+    label.config(text=text)
 
 button = tkinter.Button(text="click me", command=button_clicked)
 button.pack()
+
+field = tkinter.Entry(width=10)
+field.pack()
 
 window.mainloop()
