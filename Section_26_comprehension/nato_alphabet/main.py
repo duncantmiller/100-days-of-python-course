@@ -5,9 +5,7 @@ import pandas
 
 nato_df = pandas.read_csv("nato_phonetic_alphabet.csv")
 
-nato_dictionary = {}
-for (index, row) in nato_df.iterrows():
-    nato_dictionary[row.letter] = row.code
+nato_dictionary = {row.letter:row.code for (index, row) in nato_df.iterrows()}
 
 print(nato_dictionary)
 
