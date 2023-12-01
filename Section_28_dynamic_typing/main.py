@@ -71,7 +71,7 @@ def count_down(count, reps):
     seconds = count % 60
     if seconds < 10:
         seconds = f"0{seconds}"
-    canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
+        canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
     if count > 0:
         count -= 1
         global timer
