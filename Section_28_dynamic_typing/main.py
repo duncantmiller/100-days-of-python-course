@@ -14,8 +14,23 @@ window = tk.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
-
+timer = None
 # ---------------------------- TIMER RESET ------------------------------- #
+
+def reset():
+    """resets the whole application"""
+    reset_timer_label()
+    reset_timer()
+    reset_checks(reps=0)
+
+def reset_timer_label():
+    """resets the timer label"""
+    timer_label.config(text="Timer", fg=GREEN)
+
+def reset_timer():
+    """cancels the timer and updates the timer text"""
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text, text="00:00")
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
@@ -43,19 +58,18 @@ def countdown_time(reps):
         timer_label.config(text="Work", fg=GREEN)
         return work_seconds()
 
-def add_checks(reps):
-    """adds a checkmark"""
+def reset_checks(reps):
+    """updates checkmarks"""
     marks = ""
     work_sessions = int(reps / 2)
     for _ in range(work_sessions):
         marks += "✓"
-    check_label.config(text="marks")
-
+    check_label.config(text=marks)
 
 def start_timer(reps=0):
     """starts the timer and keeps track of reps"""
     reps += 1
-    add_checks(reps)
+    reset_checks(reps)
     count_down(countdown_time(reps), reps)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -69,7 +83,8 @@ def count_down(count, reps):
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
     if count > 0:
         count -= 1
-        window.after(1000, count_down, count, reps)
+        global timer
+        timer = window.after(1000, count_down, count, reps)
     else:
         start_timer(reps)
 
@@ -86,7 +101,7 @@ canvas.grid(column=1, row=1)
 start_button = tk.Button(text="Start", bg=YELLOW, highlightthickness=0, command=start_timer)
 start_button.grid(column=0, row=2)
 
-reset_button = tk.Button(text="Reset", bg=YELLOW, highlightthickness=0)
+reset_button = tk.Button(text="Reset", bg=YELLOW, highlightthickness=0, command=reset)
 reset_button.grid(column=2, row=2)
 
 check_label = tk.Label(text="", bg=YELLOW, fg=GREEN)
