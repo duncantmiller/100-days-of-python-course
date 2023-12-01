@@ -1,9 +1,33 @@
 import tkinter as tk
 from tkinter import messagebox
+import random
+import string
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
+def generate_password():
+    """generate a random password and populate password field"""
+    letters = list(string.ascii_letters)
+    numbers = [str(num) for num in list(range(0, 10))]
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
+    letters_count= 10
+    symbols_count = 5
+    numbers_count = 5
+
+    password = []
+    for count in range(0, letters_count):
+        password += letters[random.randint(0, len(letters) - 1)]
+
+    for count in range(0, numbers_count):
+        password += numbers[random.randint(0, len(numbers) - 1)]
+
+    for count in range(0, symbols_count):
+        password += symbols[random.randint(0, len(symbols) - 1)]
+
+    random.shuffle(password)
+
+    password_entry.insert(0, "".join(password))
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -84,7 +108,7 @@ email_entry.grid(column=1, row=2, columnspan=2)
 populate_email_entry()
 password_entry.grid(column=1, row=3)
 
-generate_password_button = tk.Button(text="Generate Password")
+generate_password_button = tk.Button(text="Generate Password", command=generate_password)
 add_button = tk.Button(text="Add", width=37, command=save)
 generate_password_button.grid(column=2, row=3)
 add_button.grid(column=1, row=4, columnspan=2)
