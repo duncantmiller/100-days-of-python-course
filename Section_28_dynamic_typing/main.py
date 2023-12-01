@@ -43,9 +43,19 @@ def countdown_time(reps):
         timer_label.config(text="Work", fg=GREEN)
         return work_seconds()
 
+def add_checks(reps):
+    """adds a checkmark"""
+    marks = ""
+    work_sessions = int(reps / 2)
+    for _ in range(work_sessions):
+        marks += "✓"
+    check_label.config(text="marks")
+
+
 def start_timer(reps=0):
     """starts the timer and keeps track of reps"""
     reps += 1
+    add_checks(reps)
     count_down(countdown_time(reps), reps)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -79,7 +89,7 @@ start_button.grid(column=0, row=2)
 reset_button = tk.Button(text="Reset", bg=YELLOW, highlightthickness=0)
 reset_button.grid(column=2, row=2)
 
-check_label = tk.Label(text="✓", bg=YELLOW, fg=GREEN)
+check_label = tk.Label(text="", bg=YELLOW, fg=GREEN)
 check_label.grid(column=1, row=3)
 
 window.mainloop()
