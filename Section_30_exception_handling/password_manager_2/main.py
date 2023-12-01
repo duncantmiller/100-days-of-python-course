@@ -3,6 +3,7 @@ from tkinter import messagebox
 import random
 import string
 import pyperclip
+import json
 
 LETTERS = list(string.ascii_letters)
 NUMBERS = [str(num) for num in list(range(0, 10))]
@@ -42,11 +43,18 @@ def is_valid():
     """checks to see if all fields are filled in"""
     return len(website()) > 0 and len(email()) > 0 and len(password()) > 0
 
+def entry_data():
+    """json format of data to write to file"""
+    return {
+        website(): {
+            "email": email(),
+            "password": password()
+        }
+    }
 def save_to_file():
     """saves the entry to the file"""
-    with open("passwords.txt", "a") as file:
-        entry = f"{website()} | {email()} | {password()}\n"
-        file.write(entry)
+    with open("passwords.json", "w") as file:
+        json.dump(entry_data(), file, indent=4)
 
 def is_okay_to_save():
     """ask user if they are okay to save"""
