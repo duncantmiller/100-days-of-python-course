@@ -7,34 +7,57 @@ from tkinter import messagebox
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
-def save():
-    """save password file"""
-    website = website_entry.get()
-    email = email_entry.get()
-    password = password_entry.get()
-    if len(website) < 1 or len(email) < 1 or len(password) < 1:
-        messagebox.showinfo(title="Sorry", message="Please don't leave any fields empty.")
-    else:
-        is_okay = messagebox.askokcancel(
-            title=website, message=f"These are the details: \nEmail:{email}\nPassword:{password}\n"
-                                    "Is it okay to save?"
-        )
-        if is_okay:
-            with open("passwords.txt", "a") as file:
-                entry = f"{website} | {email} | {password}\n"
-                file.write(entry)
-            clear_fields()
+def website():
+    """gets website entry"""
+    return website_entry.get()
+
+def email():
+    """gets email entry"""
+    return email_entry.get()
+
+def password():
+    """gets password entry"""
+    return password_entry.get()
+
+def is_valid():
+    """checks to see if all fields are filled in"""
+    return len(website()) > 0 and len(email()) > 0 and len(password()) > 0
+
+def save_to_file():
+    """saves the entry to the file"""
+    with open("passwords.txt", "a") as file:
+        entry = f"{website()} | {email()} | {password()}\n"
+        file.write(entry)
+
+def is_okay_to_save():
+    """ask user if they are okay to save"""
+    return messagebox.askokcancel(
+            title=website(), message=f"These are the details:\nWebsite:{website()}\n"
+                                     f"Email:{email()}\nPassword:{password()}\nIs it okay to save?"
+    )
+
+def save_and_reset_if_okay():
+    """make sure user is okay with entry then save and reset"""
+    if is_okay_to_save():
+        save_to_file()
+        reset_fields()
 
 def populate_email_entry():
     """inserts default email"""
     email_entry.insert(0, "duncan@foomail.com")
 
-def clear_fields():
+def reset_fields():
     """clear out the field entries"""
     for entry in [website_entry, email_entry, password_entry]:
         entry.delete(0, len(entry.get()))
-        populate_email_entry()
+    populate_email_entry()
 
+def save():
+    """save password file"""
+    if is_valid():
+        save_and_reset_if_okay()
+    else:
+        messagebox.showinfo(title="Sorry", message="Please don't leave any fields empty.")
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
