@@ -1,15 +1,29 @@
 import tkinter as tk
+from tkinter import messagebox
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
     """save password file"""
-    with open("passwords.txt", "a") as file:
-        entry = f"{website_entry.get()} | {email_entry.get()} | {password_entry.get()}\n"
-        file.write(entry)
-    clear_fields()
+    website = website_entry.get()
+    email = email_entry.get()
+    password = password_entry.get()
+    if len(website) < 1 or len(email) < 1 or len(password) < 1:
+        messagebox.showinfo(title="Sorry", message="Please don't leave any fields empty.")
+    else:
+        is_okay = messagebox.askokcancel(
+            title=website, message=f"These are the details: \nEmail:{email}\nPassword:{password}\n"
+                                    "Is it okay to save?"
+        )
+        if is_okay:
+            with open("passwords.txt", "a") as file:
+                entry = f"{website} | {email} | {password}\n"
+                file.write(entry)
+            clear_fields()
 
 def populate_email_entry():
     """inserts default email"""
