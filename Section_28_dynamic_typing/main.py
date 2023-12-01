@@ -21,22 +21,18 @@ canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 
 def work_seconds():
     """calculate work seconds"""
-
     return WORK_MIN * 60
 
 def short_break_seconds():
     """calculate short break seconds"""
-
     return SHORT_BREAK_MIN * 60
 
 def long_break_min():
     """calculate long break seconds"""
-
     return LONG_BREAK_MIN * 60
 
 def countdown_time(reps):
     """figures out time based on what stage we are in"""
-
     if reps % 8 == 0:
         timer_label.config(text="Long Break", fg=RED)
         return long_break_min()
@@ -49,7 +45,6 @@ def countdown_time(reps):
 
 def start_timer(reps=0):
     """starts the timer and keeps track of reps"""
-
     reps += 1
     count_down(countdown_time(reps), reps)
 
@@ -57,7 +52,6 @@ def start_timer(reps=0):
 
 def count_down(count, reps):
     """count down mechanism"""
-
     minutes = math.floor(count / 60)
     seconds = count % 60
     if seconds < 10:
