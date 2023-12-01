@@ -8,15 +8,18 @@ NUMBERS = [str(num) for num in list(range(0, 10))]
 SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
-def generate_password():
-    """generate a random password and populate password field"""
+def generate_random():
+    """generate a random string"""
     random_password = []
     random_password += ([random.choice(LETTERS) for _ in range(10)])
     random_password += ([random.choice(NUMBERS) for _ in range(5)])
     random_password += ([random.choice(SYMBOLS) for _ in range(5)])
     random.shuffle(random_password)
+    return "".join(random_password)
 
-    password_entry.insert(0, "".join(random_password))
+def generate_password():
+    """populate password field with random password"""
+    password_entry.insert(0, generate_random())
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
