@@ -13,7 +13,12 @@ NUMBER_COUNT = 5
 SYMBOL_COUNT = 5
 
 def search():
-    pass
+    """search for the website in stored data and return password information"""
+    with open("passwords.json", "r") as file:
+        data = json.load(file)
+    password_information = data[website()]
+    messagebox.showinfo(title=website(), message=f"Email: {password_information['email']}\n"
+                                                 f"Password: {password_information['password']}")
 
 def generate_random():
     """generate a random string"""
@@ -32,7 +37,7 @@ def generate_password():
 
 def website():
     """gets website entry"""
-    return website_entry.get()
+    return website_entry.get().lower()
 
 def email():
     """gets email entry"""
