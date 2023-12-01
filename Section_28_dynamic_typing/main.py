@@ -52,7 +52,7 @@ def countdown_time(reps):
         reset_timer_label("Long Break", RED)
         return long_break_min()
     elif reps % 2 == 0:
-        reset_timer_label("Short Break", RED)
+        reset_timer_label("Short Break", PINK)
         return short_break_seconds()
     else:
         reset_timer_label("Work", GREEN)
