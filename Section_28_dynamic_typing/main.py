@@ -6,7 +6,7 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
+WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 
@@ -19,26 +19,43 @@ canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
+def work_seconds():
+    """calculate work seconds"""
+
+    return WORK_MIN * 60
+
+def short_break_seconds():
+    """calculate short break seconds"""
+
+    return SHORT_BREAK_MIN * 60
+
+def long_break_min():
+    """calculate long break seconds"""
+
+    return LONG_BREAK_MIN * 60
+
 def countdown_time(reps):
-    work_seconds = WORK_MIN * 60
-    short_break_seconds = SHORT_BREAK_MIN * 60
-    long_break_min = LONG_BREAK_MIN * 60
+    """figures out time based on what stage we are in"""
 
     if reps % 8 == 0:
-        return long_break_min
+        return long_break_min()
     elif reps % 2 == 0:
-        return short_break_seconds
+        return short_break_seconds()
     else:
-        return work_seconds
+        return work_seconds()
 
 
 def start_timer(reps=0):
+    """starts the timer and keeps track of reps"""
+
     reps += 1
     count_down(countdown_time(reps), reps)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
 def count_down(count, reps):
+    """count down mechanism"""
+
     minutes = math.floor(count / 60)
     seconds = count % 60
     if seconds < 10:
