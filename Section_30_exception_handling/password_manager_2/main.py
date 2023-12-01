@@ -14,11 +14,18 @@ SYMBOL_COUNT = 5
 
 def search():
     """search for the website in stored data and return password information"""
-    with open("passwords.json", "r") as file:
-        data = json.load(file)
-    password_information = data[website()]
-    messagebox.showinfo(title=website(), message=f"Email: {password_information['email']}\n"
-                                                 f"Password: {password_information['password']}")
+    try:
+        with open("passwords.json", "r") as file:
+            data = json.load(file)
+        password_information = data[website()]
+        message = f"Email: {password_information['email']}\n" \
+                  f"Password: {password_information['password']}"
+    except KeyError:
+        message = "Website not found in vault"
+    except FileNotFoundError:
+        message = "Vault is empty, no websites are saved yet"
+    finally:
+        messagebox.showinfo(title=website(), message=message)
 
 def generate_random():
     """generate a random string"""
