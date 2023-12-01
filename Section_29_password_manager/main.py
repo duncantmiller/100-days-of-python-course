@@ -6,22 +6,22 @@ import string
 LETTERS = list(string.ascii_letters)
 NUMBERS = [str(num) for num in list(range(0, 10))]
 SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
-# ---------------------------- PASSWORD GENERATOR ------------------------------- #
+LETTER_COUNT = 10
+NUMBER_COUNT = 5
+SYMBOL_COUNT = 5
 
 def generate_random():
     """generate a random string"""
     random_password = []
-    random_password += ([random.choice(LETTERS) for _ in range(10)])
-    random_password += ([random.choice(NUMBERS) for _ in range(5)])
-    random_password += ([random.choice(SYMBOLS) for _ in range(5)])
+    random_password += ([random.choice(LETTERS) for _ in range(LETTER_COUNT)])
+    random_password += ([random.choice(NUMBERS) for _ in range(NUMBER_COUNT)])
+    random_password += ([random.choice(SYMBOLS) for _ in range(SYMBOL_COUNT)])
     random.shuffle(random_password)
     return "".join(random_password)
 
 def generate_password():
     """populate password field with random password"""
     password_entry.insert(0, generate_random())
-
-# ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def website():
     """gets website entry"""
@@ -74,7 +74,6 @@ def save():
         save_and_reset_if_okay()
     else:
         messagebox.showinfo(title="Sorry", message="Please don't leave any fields empty.")
-# ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
 window.title("Password Manager")
