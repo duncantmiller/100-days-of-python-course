@@ -52,17 +52,21 @@ def entry_data():
         }
     }
 
-def save_to_file():
-    """saves the entry to the file"""
+def retrieve_data():
+    """retrieve and update data from file if exists otherwise send entry data"""
     try:
         with open("passwords.json", "r") as file:
             data = json.load(file)
             data.update(entry_data())
+            return data
     except FileNotFoundError:
-        data = entry_data()
-    finally:
-        with open("passwords.json", "w") as file:
-            json.dump(data, file, indent=4)
+        return entry_data()
+
+def save_to_file():
+    """saves the entry to the file"""
+    data = retrieve_data()
+    with open("passwords.json", "w") as file:
+        json.dump(data, file, indent=4)
 
 def is_okay_to_save():
     """ask user if they are okay to save"""
