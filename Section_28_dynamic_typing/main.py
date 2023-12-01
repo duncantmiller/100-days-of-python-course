@@ -19,13 +19,13 @@ timer = None
 
 def reset():
     """resets the whole application"""
-    reset_timer_label()
+    reset_timer_label("Timer", GREEN)
     reset_timer()
     reset_checks(reps=0)
 
-def reset_timer_label():
-    """resets the timer label"""
-    timer_label.config(text="Timer", fg=GREEN)
+def reset_timer_label(text, color):
+    """resets the timer label text and color"""
+    timer_label.config(text=text, fg=color)
 
 def reset_timer():
     """cancels the timer and updates the timer text"""
@@ -49,13 +49,13 @@ def long_break_min():
 def countdown_time(reps):
     """figures out time based on what stage we are in"""
     if reps % 8 == 0:
-        timer_label.config(text="Long Break", fg=RED)
+        reset_timer_label("Long Break", RED)
         return long_break_min()
     elif reps % 2 == 0:
-        timer_label.config(text="Short Break", fg=RED)
+        reset_timer_label("Short Break", RED)
         return short_break_seconds()
     else:
-        timer_label.config(text="Work", fg=GREEN)
+        reset_timer_label("Work", GREEN)
         return work_seconds()
 
 def reset_checks(reps):
