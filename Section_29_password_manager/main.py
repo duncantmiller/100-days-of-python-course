@@ -1,4 +1,5 @@
 import tkinter as tk
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -8,6 +9,13 @@ def save():
     with open("passwords.txt", "a") as file:
         entry = f"\n{website_entry.get()} | {email_entry.get()} | {password_entry.get()}"
         file.write(entry)
+    clear_fields()
+
+def clear_fields():
+    """clear out the field entries"""
+    for entry in [website_entry, email_entry, password_entry]:
+        entry.delete(0, len(entry.get()))
+    email_entry.insert(0, "duncan@foomail.com")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
