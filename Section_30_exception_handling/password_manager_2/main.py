@@ -51,10 +51,14 @@ def entry_data():
             "password": password()
         }
     }
+
 def save_to_file():
     """saves the entry to the file"""
+    with open("passwords.json", "r") as file:
+        data = json.load(file)
+        data.update(entry_data())
     with open("passwords.json", "w") as file:
-        json.dump(entry_data(), file, indent=4)
+        json.dump(data, file, indent=4)
 
 def is_okay_to_save():
     """ask user if they are okay to save"""
