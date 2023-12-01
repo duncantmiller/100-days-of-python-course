@@ -10,12 +10,7 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 
-window = tk.Tk()
-window.title("Pomodoro")
-window.config(padx=100, pady=50, bg=YELLOW)
-canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 timer = None
-# ---------------------------- TIMER RESET ------------------------------- #
 
 def reset():
     """resets the whole application"""
@@ -31,8 +26,6 @@ def reset_timer():
     """cancels the timer and updates the timer text"""
     window.after_cancel(timer)
     canvas.itemconfig(timer_text, text="00:00")
-
-# ---------------------------- TIMER MECHANISM ------------------------------- #
 
 def work_seconds():
     """calculate work seconds"""
@@ -72,8 +65,6 @@ def start_timer(reps=0):
     reset_checks(reps)
     count_down(countdown_time(reps), reps)
 
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
-
 def count_down(count, reps):
     """count down mechanism"""
     minutes = math.floor(count / 60)
@@ -88,8 +79,10 @@ def count_down(count, reps):
     else:
         start_timer(reps)
 
-# ---------------------------- UI SETUP ------------------------------- #
-
+window = tk.Tk()
+window.title("Pomodoro")
+window.config(padx=100, pady=50, bg=YELLOW)
+canvas = tk.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 timer_label = tk.Label(text="Timer", bg=YELLOW, fg=GREEN, font=(FONT_NAME, 60))
 timer_label.grid(column=1, row=0)
 timer_label.grid(column=1, row=0)
