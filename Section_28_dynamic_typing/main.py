@@ -38,12 +38,14 @@ def countdown_time(reps):
     """figures out time based on what stage we are in"""
 
     if reps % 8 == 0:
+        timer_label.config(text="Long Break", fg=RED)
         return long_break_min()
     elif reps % 2 == 0:
+        timer_label.config(text="Short Break", fg=RED)
         return short_break_seconds()
     else:
+        timer_label.config(text="Work", fg=GREEN)
         return work_seconds()
-
 
 def start_timer(reps=0):
     """starts the timer and keeps track of reps"""
