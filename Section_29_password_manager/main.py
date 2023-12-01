@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 import string
+import pyperclip
 
 LETTERS = list(string.ascii_letters)
 NUMBERS = [str(num) for num in list(range(0, 10))]
@@ -20,8 +21,10 @@ def generate_random():
     return "".join(random_password)
 
 def generate_password():
-    """populate password field with random password"""
-    password_entry.insert(0, generate_random())
+    """populate password field with random password and copy to clipboard"""
+    new_password = generate_random()
+    password_entry.insert(0, new_password)
+    pyperclip.copy(new_password)
 
 def website():
     """gets website entry"""
