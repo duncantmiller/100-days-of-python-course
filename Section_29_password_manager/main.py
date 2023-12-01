@@ -3,6 +3,12 @@ import tkinter as tk
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
+def save():
+    """save password file"""
+    with open("passwords.txt", "a") as file:
+        entry = f"\n{website_entry.get()} | {email_entry.get()} | {password_entry.get()}"
+        file.write(entry)
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()
@@ -30,7 +36,7 @@ email_entry.insert(0, "duncan@foomail.com")
 password_entry.grid(column=1, row=3)
 
 generate_password_button = tk.Button(text="Generate Password")
-add_button = tk.Button(text="Add", width=37)
+add_button = tk.Button(text="Add", width=37, command=save)
 generate_password_button.grid(column=2, row=3)
 add_button.grid(column=1, row=4, columnspan=2)
 
