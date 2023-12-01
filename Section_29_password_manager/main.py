@@ -7,7 +7,7 @@ import tkinter as tk
 def save():
     """save password file"""
     with open("passwords.txt", "a") as file:
-        entry = f"\n{website_entry.get()} | {email_entry.get()} | {password_entry.get()}"
+        entry = f"{website_entry.get()} | {email_entry.get()} | {password_entry.get()}\n"
         file.write(entry)
     clear_fields()
 
