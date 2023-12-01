@@ -3,31 +3,20 @@ from tkinter import messagebox
 import random
 import string
 
+LETTERS = list(string.ascii_letters)
+NUMBERS = [str(num) for num in list(range(0, 10))]
+SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_password():
     """generate a random password and populate password field"""
-    letters = list(string.ascii_letters)
-    numbers = [str(num) for num in list(range(0, 10))]
-    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+    random_password = []
+    random_password += ([random.choice(LETTERS) for _ in range(10)])
+    random_password += ([random.choice(NUMBERS) for _ in range(5)])
+    random_password += ([random.choice(SYMBOLS) for _ in range(5)])
+    random.shuffle(random_password)
 
-    letters_count= 10
-    symbols_count = 5
-    numbers_count = 5
-
-    password = []
-    for count in range(0, letters_count):
-        password += letters[random.randint(0, len(letters) - 1)]
-
-    for count in range(0, numbers_count):
-        password += numbers[random.randint(0, len(numbers) - 1)]
-
-    for count in range(0, symbols_count):
-        password += symbols[random.randint(0, len(symbols) - 1)]
-
-    random.shuffle(password)
-
-    password_entry.insert(0, "".join(password))
+    password_entry.insert(0, "".join(random_password))
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
