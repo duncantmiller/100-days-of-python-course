@@ -11,11 +11,15 @@ def save():
         file.write(entry)
     clear_fields()
 
+def populate_email_entry():
+    """inserts default email"""
+    email_entry.insert(0, "duncan@foomail.com")
+
 def clear_fields():
     """clear out the field entries"""
     for entry in [website_entry, email_entry, password_entry]:
         entry.delete(0, len(entry.get()))
-    email_entry.insert(0, "duncan@foomail.com")
+        populate_email_entry()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -40,7 +44,7 @@ password_entry = tk.Entry(width=22)
 website_entry.grid(column=1, row=1, columnspan=2)
 website_entry.focus()
 email_entry.grid(column=1, row=2, columnspan=2)
-email_entry.insert(0, "duncan@foomail.com")
+populate_email_entry()
 password_entry.grid(column=1, row=3)
 
 generate_password_button = tk.Button(text="Generate Password")
