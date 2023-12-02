@@ -1,6 +1,13 @@
 import tkinter as tk
+import pandas
 
 BACKGROUND_COLOR = "#B1DDC6"
+
+def retrieve_words():
+    data = pandas.read_csv("data/french_words.csv")
+    data_frame = pandas.DataFrame(data)
+    dictionary = pandas.DataFrame.to_dict(data_frame, orient='records')
+    print(dictionary)
 
 window = tk.Tk()
 window.title("Flashcards")
@@ -20,4 +27,5 @@ incorrect_image = tk.PhotoImage(file="images/wrong.png")
 incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0)
 incorrect_button.grid(column=0, row=2)
 
+retrieve_words()
 tk.mainloop()
