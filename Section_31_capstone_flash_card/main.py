@@ -1,7 +1,6 @@
 import tkinter as tk
 import pandas
 import random
-import time
 
 BACKGROUND_COLOR = "#B1DDC6"
 
@@ -58,7 +57,6 @@ dictionary = retrieve_words()
 random_entry = select_random_entry_from(dictionary)
 update_word_text(french_word(random_entry))
 
-# update_word_text(english_word(random_entry))
-# update_language_text("English")
+window.after(3000, next_word)
 
 tk.mainloop()
