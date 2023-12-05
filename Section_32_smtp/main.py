@@ -1,9 +1,10 @@
 import smtplib
 import datetime as dt
 import random
+import os
 
-email = "foo@gmail.com"
-password = "bar"
+email = os.environ.get("100_DAYS_EMAIL_ADDRESS")
+password = os.environ.get("100_DAYS_EMAIL_PASSWORD")
 
 def get_quote():
     """get a quote from the file"""
