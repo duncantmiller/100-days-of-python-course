@@ -8,18 +8,26 @@ FRENCH = "French"
 
 def retrieve_words():
     """read the file contents and return a dictionary"""
-    data = pandas.read_csv("data/french_words.csv")
+    global words_to_learn
+    try:
+        data = pandas.read_csv("data/words_to_learn.csv")
+    except FileNotFoundError:
+        data = pandas.read_csv("data/french_words.csv")
     data_frame = pandas.DataFrame(data)
-    dictionary = pandas.DataFrame.to_dict(data_frame, orient='records')
-    return dictionary
+    words_to_learn = pandas.DataFrame.to_dict(data_frame, orient='records')
 
-def select_random_entry_from(dictionary):
+def save_to_learn():
+    """save a file with the words to learn"""
+    data_frame = pandas.DataFrame(words_to_learn)
+    data_frame.to_csv("data/words_to_learn.csv")
+
+def select_random_entry():
     """get a random word combination"""
-    return random.choice(dictionary)
+    return random.choice(words_to_learn)
 
-def update_word_text(language, entry):
+def update_word_text(language):
     """updates the word on the card"""
-    canvas.itemconfig(word_text, text=entry[language])
+    canvas.itemconfig(word_text, text=current_entry[language])
 
 def update_language_text(language):
     """updates the language on the card"""
@@ -38,23 +46,33 @@ def update_card_for(language):
 
 def next_word():
     """set up the next word"""
-    global timer
+    global timer, current_entry
     window.after_cancel(timer)
-    entry = select_random_entry_from(dictionary)
-    update_word_text(FRENCH, entry)
+    current_entry = select_random_entry()
+    update_word_text(FRENCH)
     update_language_text(FRENCH)
     update_card_for(FRENCH)
-    timer = start_timer(entry)
+    timer = start_timer()
 
-def flip_card(language, entry):
+def correct():
+    """remove the word and call the next word"""
+    words_to_learn.remove(current_entry)
+    save_to_learn()
+    next_word()
+
+def incorrect():
+    """call the next word"""
+    next_word()
+
+def flip_card(language):
     """flips the card and updates the text"""
     update_language_text(language)
-    update_word_text(language, entry)
+    update_word_text(language)
     update_card_for(language)
 
-def start_timer(entry):
+def start_timer():
     """start the timer on the new word"""
-    return window.after(3000, flip_card, ENGLISH, entry)
+    return window.after(3000, flip_card, ENGLISH)
 
 window = tk.Tk()
 window.title("Flashcards")
@@ -69,16 +87,17 @@ canvas.grid(column=0, row=0, columnspan=2)
 language_text = canvas.create_text(400, 150, text="French", font=("Ariel", 40, "italic"))
 word_text = canvas.create_text(400, 263, text="trouve", font=("Ariel", 60, "bold"))
 correct_image = tk.PhotoImage(file="images/right.png")
-correct_button = tk.Button(image=correct_image, highlightthickness=0, command=next_word)
+correct_button = tk.Button(image=correct_image, highlightthickness=0, command=correct)
 correct_button.grid(column=1, row=2)
 incorrect_image = tk.PhotoImage(file="images/wrong.png")
-incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0, command=next_word)
+incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0, command=incorrect)
 incorrect_button.grid(column=0, row=2)
 
-dictionary = retrieve_words()
-first_entry = select_random_entry_from(dictionary)
-update_word_text(FRENCH, first_entry)
+words_to_learn = []
+retrieve_words()
+current_entry = select_random_entry()
+update_word_text(FRENCH)
 
-timer = start_timer(first_entry)
+timer = start_timer()
 
 tk.mainloop()
