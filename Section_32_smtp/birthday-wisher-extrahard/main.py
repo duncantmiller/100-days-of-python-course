@@ -18,6 +18,7 @@ email = os.environ.get("100_DAYS_EMAIL_ADDRESS")
 password = os.environ.get("100_DAYS_EMAIL_PASSWORD")
 
 def matching_birthdays():
+    """find matching birthdays"""
     data = pandas.read_csv("birthdays.csv")
     data_frame = pandas.DataFrame(data)
     today = dt.datetime.now().date()
@@ -36,7 +37,7 @@ def get_message():
         message = file.read()
     return message
 
-def send_email(message, name):
+def send_email(message, name, email):
     """send the email"""
     personalized_letter = message.replace('[NAME]', name)
     print(personalized_letter)
@@ -44,9 +45,9 @@ def send_email(message, name):
     #     connection.starttls()
     #     connection.login(user=email, password=password)
     #     connection.sendmail(
-    #         from_addr=email, to_addrs="bar@gmail.com", msg="Subject:Happy Birthday!\n\n{quote}"
+    #         from_addr=email, to_addrs=email, msg="Subject:Happy Birthday!\n\n{quote}"
     #     )
 
 print(matching_birthdays())
 for birthday in matching_birthdays():
-    send_email(get_message(), birthday[0])
+    send_email(get_message(), name=birthday[0], email=birthday[1])
