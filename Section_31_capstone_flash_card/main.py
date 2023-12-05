@@ -32,6 +32,10 @@ def update_language_text(language):
     """updates the language on the card"""
     canvas.itemconfig(language_text, text=language)
 
+def next_word():
+    random_entry = select_random_entry_from(dictionary)
+    update_word_text(french_word(random_entry))
+
 window = tk.Tk()
 window.title("Flashcards")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
@@ -44,17 +48,17 @@ canvas.grid(column=0, row=0, columnspan=2)
 language_text = canvas.create_text(400, 150, text="French", font=("Ariel", 40, "italic"))
 word_text = canvas.create_text(400, 263, text="trouve", font=("Ariel", 60, "bold"))
 correct_image = tk.PhotoImage(file="images/right.png")
-correct_button = tk.Button(image=correct_image, highlightthickness=0)
+correct_button = tk.Button(image=correct_image, highlightthickness=0, command=next_word)
 correct_button.grid(column=1, row=2)
 incorrect_image = tk.PhotoImage(file="images/wrong.png")
-incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0)
+incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0, command=next_word)
 incorrect_button.grid(column=0, row=2)
 
 dictionary = retrieve_words()
 random_entry = select_random_entry_from(dictionary)
 update_word_text(french_word(random_entry))
 
-update_word_text(english_word(random_entry))
-update_language_text("English")
+# update_word_text(english_word(random_entry))
+# update_language_text("English")
 
 tk.mainloop()
