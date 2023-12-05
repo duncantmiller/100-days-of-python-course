@@ -19,7 +19,7 @@ def retrieve_words():
 def save_to_learn():
     """save a file with the words to learn"""
     data_frame = pandas.DataFrame(words_to_learn)
-    data_frame.to_csv("data/words_to_learn.csv")
+    data_frame.to_csv("data/words_to_learn.csv", index=False)
 
 def select_random_entry():
     """get a random word combination"""
