@@ -12,9 +12,22 @@ import smtplib
 import datetime as dt
 import random
 import os
+import pandas
 
 email = os.environ.get("100_DAYS_EMAIL_ADDRESS")
 password = os.environ.get("100_DAYS_EMAIL_PASSWORD")
+
+def matching_birthdays():
+    data = pandas.read_csv("birthdays.csv")
+    data_frame = pandas.DataFrame(data)
+    today = dt.datetime.now().date()
+    # Convert the year, month, and day columns to a datetime column
+    data_frame['date'] = pandas.to_datetime(data_frame[['year', 'month', 'day']])
+
+    # Filter the DataFrame based on the target date
+    matching_records = data_frame[data_frame['date'].dt.date == today]
+
+    return matching_records.values
 
 def get_message():
     """get a random message"""
@@ -34,11 +47,6 @@ def send_email(message, name):
     #         from_addr=email, to_addrs="bar@gmail.com", msg="Subject:Happy Birthday!\n\n{quote}"
     #     )
 
-def is_it_monday():
-    """checks to see if today is monday"""
-    today = dt.datetime.now()
-    return True
-    #return today.weekday == 1
-
-if is_it_monday():
-    send_email(get_message(), "dave")
+print(matching_birthdays())
+for birthday in matching_birthdays():
+    send_email(get_message(), birthday[0])
