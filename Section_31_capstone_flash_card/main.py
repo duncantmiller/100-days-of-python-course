@@ -38,12 +38,13 @@ def update_card_for(language):
 
 def next_word():
     """set up the next word"""
+    global timer
     window.after_cancel(timer)
     entry = select_random_entry_from(dictionary)
     update_word_text(FRENCH, entry)
     update_language_text(FRENCH)
     update_card_for(FRENCH)
-    start_timer(entry)
+    timer = start_timer(entry)
 
 def flip_card(language, entry):
     """flips the card and updates the text"""
@@ -75,9 +76,9 @@ incorrect_button = tk.Button(image=incorrect_image, highlightthickness=0, comman
 incorrect_button.grid(column=0, row=2)
 
 dictionary = retrieve_words()
-entry = select_random_entry_from(dictionary)
-update_word_text(FRENCH, entry)
+first_entry = select_random_entry_from(dictionary)
+update_word_text(FRENCH, first_entry)
 
-timer = start_timer(entry)
+timer = start_timer(first_entry)
 
 tk.mainloop()
