@@ -14,7 +14,7 @@ import random
 import os
 import pandas
 
-email = os.environ.get("100_DAYS_EMAIL_ADDRESS")
+from_email = os.environ.get("100_DAYS_EMAIL_ADDRESS")
 password = os.environ.get("100_DAYS_EMAIL_PASSWORD")
 
 def matching_birthdays():
@@ -37,17 +37,17 @@ def get_message():
         message = file.read()
     return message
 
-def send_email(message, name, email):
+def send_email(message, name, to_email):
     """send the email"""
     personalized_letter = message.replace('[NAME]', name)
     print(personalized_letter)
     # with smtplib.SMTP("smtp.gmail.com") as connection:
     #     connection.starttls()
-    #     connection.login(user=email, password=password)
+    #     connection.login(user=from_email, password=password)
     #     connection.sendmail(
-    #         from_addr=email, to_addrs=email, msg="Subject:Happy Birthday!\n\n{quote}"
+    #         from_addr=from_email, to_addrs=to_email, msg="Subject:Happy Birthday!\n\n{quote}"
     #     )
 
 print(matching_birthdays())
 for birthday in matching_birthdays():
-    send_email(get_message(), name=birthday[0], email=birthday[1])
+    send_email(get_message(), name=birthday[0], to_email=birthday[1])
