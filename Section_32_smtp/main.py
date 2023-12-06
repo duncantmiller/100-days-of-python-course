@@ -25,4 +25,4 @@ def is_it_monday():
     return today.weekday == 0
 
 if is_it_monday():
-    send_email(get_quote)
+    send_email(get_quote())
