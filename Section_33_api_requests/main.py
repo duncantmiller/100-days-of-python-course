@@ -18,10 +18,13 @@ parameters = {
     "formatted": 0
 }
 
+def sun_response_hour(value):
+    return int(value.split("T")[1].split(":")[0])
+
 sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters)
 sun_json = sun_response.json()
-sunrise_hour = int(sun_json["results"]["sunrise"].split("T")[1].split(":")[0])
-sunset_hour = int(sun_json["results"]["sunset"].split("T")[1].split(":")[0])
+sunrise_hour = sun_response_hour(sun_json["results"]["sunrise"])
+sunset_hour = sun_response_hour(sun_json["results"]["sunset"])
 
 while True:
     current_hour = datetime.now().hour
