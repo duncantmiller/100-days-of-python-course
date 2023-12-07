@@ -1,12 +1,12 @@
 """import Question, question data and QuizBrain"""
 
 from question_model import Question
-from data import question_data
 from quiz_brain import QuizBrain
+from data import question_data
 
 question_bank = []
 for item in question_data:
-    question = Question(item["text"], item["answer"])
+    question = Question(item["question"], item["correct_answer"])
     question_bank.append(question)
 
 quiz = QuizBrain(question_bank)
