@@ -14,5 +14,11 @@ def home():
 def blog_index():
     return render_template("blog/index.html", posts=all_posts)
 
+@app.route('/blog/<int:id>')
+def blog_show(id):
+    post = next((post for post in all_posts if post['id'] == id), None)
+
+    return render_template("blog/show.html", post=post)
+
 if __name__ == "__main__":
     app.run(debug=True)
