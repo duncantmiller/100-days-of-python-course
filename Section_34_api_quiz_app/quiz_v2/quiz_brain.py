@@ -1,4 +1,5 @@
 """QuizBrain"""
+import html
 
 class QuizBrain:
     """The logic for running a quiz"""
@@ -36,10 +37,14 @@ class QuizBrain:
         """a string of the score"""
         return f"{self.correct_answers}/{self.question_total()}"
 
+    def current_question_text(self):
+        """returns unescaped question string"""
+        return html.unescape(self.current_question().text)
+
     def next_question(self):
         """asks for the answer and checks it"""
         answer = input(
-            f"Q.{self.human_question_number()} {self.current_question().text} (True/False): "
+            f"Q.{self.human_question_number()} {self.current_question_text()} (True/False): "
         )
         self.check_answer(answer)
         self.increment_question_number()
