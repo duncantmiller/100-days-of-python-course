@@ -34,10 +34,15 @@ def sun_json():
 def current_hour():
     return datetime.now().hour
 
+def is_night():
+    return current_hour() > my_hour_of("sunset") and current_hour() < my_hour_of("sunrise")
+
+def is_iss_near():
+    abs(iss_latitude() - MY_LATITUDE) < 5 and abs(iss_longitude() - MY_LONGITUDE) < 5
+
 while True:
-    if current_hour() > my_hour_of("sunset") and current_hour() < my_hour_of("sunrise"):
-        if abs(iss_latitude() - MY_LATITUDE) < 5 and abs(iss_longitude() - MY_LONGITUDE) < 5:
-            print("Look up!")
+    if is_night() and is_iss_near():
+        print("Look up!")
     else:
         print("Don't look up.")
     time.sleep(60)
