@@ -44,21 +44,27 @@ class QuizInterface:
 
     def set_up_next_question(self):
         """sets up the screen for the next question"""
+        self.canvas.config(bg="white")
         self.quiz.increment_question_number()
         self.get_next_question()
         self.update_score_display()
 
     def mark_true(self):
         """checks if true from the quiz brain"""
-        if self.quiz.is_answer_correct("true"):
+        self.give_feedback_and_set_up_next(self.quiz.is_answer_correct("true"))
+
+    def give_feedback_and_set_up_next(self, is_correct):
+        """send feedback to screen"""
+        if is_correct:
+            self.canvas.config(bg="green")
             self.quiz.increment_correct_answers()
-        self.set_up_next_question()
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000, self.set_up_next_question)
 
     def mark_false(self):
         """checks if false from the quiz brain"""
-        if self.quiz.is_answer_correct("false"):
-            self.quiz.increment_correct_answers()
-        self.set_up_next_question()
+        self.give_feedback_and_set_up_next(self.quiz.is_answer_correct("false"))
 
     def update_score_display(self):
         """updates the score on screen"""
