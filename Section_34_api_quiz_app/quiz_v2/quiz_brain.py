@@ -43,7 +43,7 @@ class QuizBrain:
 
     def next_question(self):
         """asks for the answer and checks it"""
-        return f"Q.{self.human_question_number()} {self.current_question_text()} (True/False): "
+        return f"Q.{self.human_question_number()} {self.current_question_text()}"
         # self.check_answer(answer)
         # self.increment_question_number()
 
