@@ -20,16 +20,16 @@ def parameters():
     }
 
 def sun_response_hour(value):
-    return int(value.split("T")[1].split(":")[0])
+    return int(sun_json()["results"][value].split("T")[1].split(":")[0])
 
-sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters())
-sun_json = sun_response.json()
-sunrise_hour = sun_response_hour(sun_json["results"]["sunrise"])
-sunset_hour = sun_response_hour(sun_json["results"]["sunset"])
+def sun_json():
+    sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters())
+    sun_response.raise_for_status()
+    return sun_response.json()
 
 while True:
     current_hour = datetime.now().hour
-    if current_hour > sunset_hour and current_hour < sunrise_hour:
+    if current_hour > sun_response_hour("sunset") and current_hour < sun_response_hour("sunrise"):
         if abs(iss_latitude - MY_LATITUDE) < 5 and abs(iss_longitude - MY_LONGITUDE) < 5:
             print("Look up!")
     else:
