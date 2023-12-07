@@ -5,12 +5,16 @@ import time
 MY_LATITUDE = 45.51481
 MY_LONGITUDE = -122.68427
 
-iss_response = requests.get(url="http://api.open-notify.org/iss-now.json")
-iss_response.raise_for_status()
+def iss_json():
+    iss_response = requests.get(url="http://api.open-notify.org/iss-now.json")
+    iss_response.raise_for_status()
+    return iss_response.json()
 
-iss_json = iss_response.json()
-iss_latitude = float(iss_json["iss_position"]["latitude"])
-iss_longitude = float(iss_json["iss_position"]["longitude"])
+def iss_latitude():
+    return float(iss_json()["iss_position"]["latitude"])
+
+def iss_longitude():
+    return float(iss_json["iss_position"]["longitude"])
 
 def parameters():
     return {
@@ -30,7 +34,7 @@ def sun_json():
 while True:
     current_hour = datetime.now().hour
     if current_hour > sun_response_hour("sunset") and current_hour < sun_response_hour("sunrise"):
-        if abs(iss_latitude - MY_LATITUDE) < 5 and abs(iss_longitude - MY_LONGITUDE) < 5:
+        if abs(iss_latitude() - MY_LATITUDE) < 5 and abs(iss_longitude() - MY_LONGITUDE) < 5:
             print("Look up!")
     else:
         print("Don't look up.")
