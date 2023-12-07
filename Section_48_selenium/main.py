@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome()
 
@@ -12,4 +13,5 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 
 search_box = driver.find_element(By.NAME, "search")
 search_box.send_keys("Python")
-driver.find_element(By.CLASS_NAME, "cdx-search-input__end-button").click()
+# driver.find_element(By.CLASS_NAME, "cdx-search-input__end-button").click()
+search_box.send_keys(Keys.ENTER)
