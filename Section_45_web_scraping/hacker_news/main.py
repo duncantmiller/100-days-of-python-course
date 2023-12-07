@@ -22,4 +22,6 @@ for row in rows:
     }
     front_page_links.append(row_data)
 
-print(front_page_links)
+max_points_dict = max(front_page_links, key=lambda x: x['points'])
+
+print("Max Points:", max_points_dict)
