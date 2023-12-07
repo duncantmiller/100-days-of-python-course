@@ -9,14 +9,16 @@ class QuizInterface:
 
     def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
-        self.window = tk.Tk()
-        self.window.title = "Quizzler"
-        self.window.config(padx=20, pady=20, bg=THEME_COLOR)
+        self.set_up_tk_configs()
+        self.set_up_score_label()
+        self.set_up_question_text()
+        self.set_up_buttons()
+        self.get_next_question()
 
-        self.score_label = tk.Label(text="Score 0/10", fg="white", bg=THEME_COLOR)
-        self.score_label.grid(row=0, column=1)
+        self.window.mainloop()
 
-        self.canvas = tk.Canvas(width=300, height=250, bg="white")
+    def set_up_question_text(self):
+        """question text config and creation"""
         self.ui_question_text = self.canvas.create_text(
             150,
             125,
@@ -25,22 +27,32 @@ class QuizInterface:
             fill=THEME_COLOR,
             font=("Arial", 20, "italic")
         )
-        self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
 
-        true_image = tk.PhotoImage(file="images/true.png")
+    def set_up_score_label(self):
+        """score label config and creation"""
+        self.score_label = tk.Label(text="Score 0/10", fg="white", bg=THEME_COLOR)
+        self.score_label.grid(row=0, column=1)
+
+    def set_up_buttons(self):
+        """buttons config and creation"""
+        self.true_image = tk.PhotoImage(file="images/true.png")
+        self.false_image = tk.PhotoImage(file="images/false.png")
         self.true_button = tk.Button(
-            image=true_image, highlightthickness=0, command=self.mark_true
+            image=self.true_image, highlightthickness=0, command=self.mark_true
         )
         self.true_button.grid(row=2, column=0)
-
-        false_image = tk.PhotoImage(file="images/false.png")
         self.false_button = tk.Button(
-            image=false_image, highlightthickness=0, command=self.mark_false
+            image=self.false_image, highlightthickness=0, command=self.mark_false
         )
         self.false_button.grid(row=2, column=1)
-        self.get_next_question()
 
-        self.window.mainloop()
+    def set_up_tk_configs(self):
+        """configs for tk and window"""
+        self.window = tk.Tk()
+        self.window.title = "Quizzler"
+        self.window.config(padx=20, pady=20, bg=THEME_COLOR)
+        self.canvas = tk.Canvas(width=300, height=250, bg="white")
+        self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
 
     def set_up_next_question(self):
         """sets up the screen for the next question"""
