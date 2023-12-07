@@ -73,10 +73,16 @@ class QuizInterface:
     def get_next_question(self):
         """gets the next question from the quiz brain"""
         if self.quiz.still_has_questions():
-            question_text = self.quiz.next_question()
-            self.canvas.itemconfig(self.ui_question_text, text=question_text)
+            self.update_question_text(self.quiz.next_question())
         else:
-            self.canvas.itemconfig(self.ui_question_text, text="You've reach the end!")
-            self.true_button.config(state="disabled")
-            self.false_button.config(state="disabled")
+            self.end_quiz()
 
+    def update_question_text(self, question_text):
+        """updates the question text on the screen"""
+        self.canvas.itemconfig(self.ui_question_text, text=question_text)
+
+    def end_quiz(self):
+        """ends the quiz"""
+        self.update_question_text("You've reach the end!")
+        self.true_button.config(state="disabled")
+        self.false_button.config(state="disabled")
