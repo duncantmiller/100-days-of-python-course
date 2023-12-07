@@ -23,7 +23,7 @@ def parameters():
         "formatted": 0
     }
 
-def sun_response_hour(value):
+def my_hour_of(value):
     return int(sun_json()["results"][value].split("T")[1].split(":")[0])
 
 def sun_json():
@@ -31,9 +31,11 @@ def sun_json():
     sun_response.raise_for_status()
     return sun_response.json()
 
+def current_hour():
+    return datetime.now().hour
+
 while True:
-    current_hour = datetime.now().hour
-    if current_hour > sun_response_hour("sunset") and current_hour < sun_response_hour("sunrise"):
+    if current_hour() > my_hour_of("sunset") and current_hour() < my_hour_of("sunrise"):
         if abs(iss_latitude() - MY_LATITUDE) < 5 and abs(iss_longitude() - MY_LONGITUDE) < 5:
             print("Look up!")
     else:
