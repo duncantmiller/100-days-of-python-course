@@ -12,7 +12,11 @@ print(iss_json)
 iss_latitude = iss_json["iss_position"]["latitude"]
 iss_longitude = iss_json["iss_position"]["longitude"]
 
-parameters = f"lat={MY_LATITUDE}&lng={MY_LONGITUDE}&formatted=0"
+parameters = {
+    "lat": MY_LATITUDE,
+    "lng": MY_LONGITUDE,
+    "formatted": 0
+}
 
 sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters)
 sun_json = sun_response.json()
