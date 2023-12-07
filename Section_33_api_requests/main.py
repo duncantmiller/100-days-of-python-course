@@ -12,16 +12,17 @@ iss_json = iss_response.json()
 iss_latitude = float(iss_json["iss_position"]["latitude"])
 iss_longitude = float(iss_json["iss_position"]["longitude"])
 
-parameters = {
-    "lat": MY_LATITUDE,
-    "lng": MY_LONGITUDE,
-    "formatted": 0
-}
+def parameters():
+    return {
+        "lat": MY_LATITUDE,
+        "lng": MY_LONGITUDE,
+        "formatted": 0
+    }
 
 def sun_response_hour(value):
     return int(value.split("T")[1].split(":")[0])
 
-sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters)
+sun_response = requests.get(url=f"http://api.sunrise-sunset.org/json?", params=parameters())
 sun_json = sun_response.json()
 sunrise_hour = sun_response_hour(sun_json["results"]["sunrise"])
 sunset_hour = sun_response_hour(sun_json["results"]["sunset"])
