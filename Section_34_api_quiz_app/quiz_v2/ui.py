@@ -13,7 +13,7 @@ class QuizInterface:
         self.window.title = "Quizzler"
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
 
-        self.score_label = tk.Label(text="Score 0", fg="white", bg=THEME_COLOR)
+        self.score_label = tk.Label(text="Score 0/10", fg="white", bg=THEME_COLOR)
         self.score_label.grid(row=0, column=1)
 
         self.canvas = tk.Canvas(width=300, height=250, bg="white")
@@ -28,15 +28,41 @@ class QuizInterface:
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
 
         true_image = tk.PhotoImage(file="images/true.png")
-        self.true_button = tk.Button(image=true_image, highlightthickness=0)
+        self.true_button = tk.Button(
+            image=true_image, highlightthickness=0, command=self.mark_true
+        )
         self.true_button.grid(row=2, column=0)
 
         false_image = tk.PhotoImage(file="images/false.png")
-        self.false_button = tk.Button(image=false_image, highlightthickness=0)
+        self.false_button = tk.Button(
+            image=false_image, highlightthickness=0, command=self.mark_false
+        )
         self.false_button.grid(row=2, column=1)
         self.get_next_question()
 
         self.window.mainloop()
+
+    def set_up_next_question(self):
+        """sets up the screen for the next question"""
+        self.quiz.increment_question_number()
+        self.get_next_question()
+        self.update_score_display()
+
+    def mark_true(self):
+        """checks if true from the quiz brain"""
+        if self.quiz.is_answer_correct("true"):
+            self.quiz.increment_correct_answers()
+        self.set_up_next_question()
+
+    def mark_false(self):
+        """checks if false from the quiz brain"""
+        if self.quiz.is_answer_correct("false"):
+            self.quiz.increment_correct_answers()
+        self.set_up_next_question()
+
+    def update_score_display(self):
+        """updates the score on screen"""
+        self.score_label.config(text=self.quiz.score())
 
     def get_next_question(self):
         """gets the next question from the quiz brain"""

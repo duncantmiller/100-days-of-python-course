@@ -47,14 +47,14 @@ class QuizBrain:
         # self.check_answer(answer)
         # self.increment_question_number()
 
-    def check_answer(self, answer):
+    def is_answer_correct(self, answer):
         """checks the answer and prints details"""
         question = self.current_question()
         if answer.lower() == question.answer.lower():
-            self.increment_correct_answers()
-            print("That's correct!")
+            # self.increment_correct_answers()
+            return True
         else:
-            print("That's wrong.")
+            return False
         print(f"The correct answer is: {question.answer}")
         print(f"Your current score is {self.score()}\n")
 
