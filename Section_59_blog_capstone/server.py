@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 app = Flask(__name__)
@@ -9,6 +9,13 @@ all_posts = posts.json()
 @app.route('/')
 def home():
     return render_template("home/index.html", num=1)
+
+@app.route('/inquiry', methods=["POST"])
+def receive_data():
+    name = request.form["InputName"]
+    email = request.form["InputEmail"]
+    message = request.form["InputMessage"]
+    return f"<ul><li>Name: {name}</li><li>Email: {email}</li><li>Message: {message}</li></ul>"
 
 @app.route('/blog')
 def blog_index():

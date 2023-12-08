@@ -7,4 +7,21 @@
     <p>
         I'm Duncan Miller and this is my website!
     </p>
+    <h2>Contact Me</h2>
+    <form action="/inquiry" method="post">
+        <div class="mb-3">
+            <label for="InputName" class="form-label">Name</label>
+            <input type="text" class="form-control" name="InputName" aria-describedby="emailHelp">
+          </div>
+        <div class="mb-3">
+          <label for="InputEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="InputEmail" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="InputMessage" class="form-label">Message</label>
+          <textarea class="form-control" aria-label="Message" name="InputMessage"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 {% endblock %}
