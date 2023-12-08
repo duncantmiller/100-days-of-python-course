@@ -22,17 +22,17 @@ class Article(db.Model):
 
 with app.app_context():
     db.create_all()
-    articles = requests.get("https://api.npoint.io/c790b4d5cab58020d391")
-    all_articles = articles.json()
+    # articles = requests.get("https://api.npoint.io/c790b4d5cab58020d391")
+    # all_articles = articles.json()
 
-    for article in all_articles:
-        new_article = Article(
-                title=article["title"],
-                subtitle=article["subtitle"],
-                body=article["body"],
-            )
-        db.session.add(new_article)
-        db.session.commit()
+    # for article in all_articles:
+    #     new_article = Article(
+    #             title=article["title"],
+    #             subtitle=article["subtitle"],
+    #             body=article["body"],
+    #         )
+    #     db.session.add(new_article)
+    #     db.session.commit()
 
 @app.route('/')
 def home():
@@ -47,12 +47,14 @@ def receive_data():
 
 @app.route('/blog')
 def blog_index():
-    return render_template("blog/index.html", posts=all_posts)
+    result = db.session.execute(db.select(Article).order_by(Article.title))
+    articles = result.scalars().all()
+    return render_template("blog/index.html", articles=articles)
 
 @app.route('/blog/<int:id>')
 def blog_show(id):
-    post = next((post for post in all_posts if post['id'] == id), None)
-    return render_template("blog/show.html", post=post)
+    article = db.get_or_404(Article, id)
+    return render_template("blog/show.html", article=article)
 
 @app.route('/api_docs')
 def api_docs():
@@ -60,12 +62,14 @@ def api_docs():
 
 @app.route('/api/v1/articles', methods=["GET"])
 def get_articles():
-    return jsonify(all_posts)
+    result = db.session.execute(db.select(Article).order_by(Article.title))
+    articles = result.scalars().all()
+    return jsonify(articles)
 
 @app.route('/api/v1/articles/<int:id>', methods=["GET"])
 def get_article(id):
-    post = next((post for post in all_posts if post['id'] == id), None)
-    return jsonify(post)
+    article = db.get_or_404(Article, id)
+    return jsonify(article)
 
 if __name__ == "__main__":
     app.run(debug=True)
