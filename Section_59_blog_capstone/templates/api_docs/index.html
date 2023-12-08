@@ -1,0 +1,16 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}API Docs{% endblock %}
+
+{% block content %}
+    <h1>API Docs</h1>
+    <p>Restful API, submit a get request to the following endpoints:</p>
+    <ul>
+        <li>
+            All Articles: http://127.0.0.1:5000{{url_for('get_articles')}}
+        </li>
+        <li>
+            Article: http://127.0.0.1:5000{{url_for('get_articles')}}/&lt;id&gt;
+        </li>
+    </ul>
+{% endblock %}
