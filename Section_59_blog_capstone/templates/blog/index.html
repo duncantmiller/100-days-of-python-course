@@ -6,6 +6,6 @@
     {% for post in posts: %}
         <h1>{{post["title"]}}</h1>
         <h2>{{post["subtitle"]}}</h2>
-        <a href="{{url_for('blog_show', id=post['id'])}}">Read more</a>
+        <a href="{{url_for('blog_show', id=post['id'])}}" class="btn btn-primary" role="button">Read more</a>
     {% endfor %}
 {% endblock %}
