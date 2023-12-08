@@ -1,11 +1,38 @@
 from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 import requests
 import json
 
 app = Flask(__name__)
 
-posts = requests.get("https://api.npoint.io/c790b4d5cab58020d391")
-all_posts = posts.json()
+##CREATE DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///articles.db'
+db = SQLAlchemy()
+db.init_app(app)
+
+##CREATE TABLE
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), nullable=False)
+    subtitle = db.Column(db.String(500), nullable=False)
+    body = db.Column(db.String(500), nullable=False)
+
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
+with app.app_context():
+    db.create_all()
+    articles = requests.get("https://api.npoint.io/c790b4d5cab58020d391")
+    all_articles = articles.json()
+
+    for article in all_articles:
+        new_article = Article(
+                title=article["title"],
+                subtitle=article["subtitle"],
+                body=article["body"],
+            )
+        db.session.add(new_article)
+        db.session.commit()
 
 @app.route('/')
 def home():
