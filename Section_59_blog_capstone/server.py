@@ -64,12 +64,12 @@ def api_docs():
 def get_articles():
     result = db.session.execute(db.select(Article).order_by(Article.title))
     articles = result.scalars().all()
-    return jsonify(articles)
+    return jsonify(articles=[article.to_dict() for article in articles])
 
 @app.route('/api/v1/articles/<int:id>', methods=["GET"])
 def get_article(id):
     article = db.get_or_404(Article, id)
-    return jsonify(article)
+    return jsonify(article.to_dict())
 
 if __name__ == "__main__":
     app.run(debug=True)
