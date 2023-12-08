@@ -8,7 +8,7 @@ all_posts = posts.json()
 
 @app.route('/')
 def home():
-    return render_template("index.html", num=1)
+    return render_template("home/index.html", num=1)
 
 @app.route('/blog')
 def blog_index():
