@@ -1,4 +1,5 @@
 import pandas
+import matplotlib.pyplot as pyplot
 
 column_names = ['Date', 'Tag', 'Posts']
 data_frame = pandas.read_csv('QueryResults.csv', names=column_names).dropna()
@@ -15,3 +16,6 @@ print(type(data_frame['Date'][1]))
 reshaped_data_frame = data_frame.pivot(index='Date', columns='Tag', values='Posts')
 print(reshaped_data_frame.head())
 print(reshaped_data_frame.columns)
+
+pyplot.plot(reshaped_data_frame.index, reshaped_data_frame['ruby'])
+pyplot.show()
