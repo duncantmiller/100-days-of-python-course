@@ -37,4 +37,6 @@ themes_by_year = data_frame.groupby('year').agg({'theme_id': pandas.Series.nuniq
 themes_by_year.rename(columns= {'theme_id': 'theme count'}, inplace = True)
 print(themes_by_year.head())
 
+pyplot.plot(sets_by_year_mod.index, themes_by_year[:-2])
+
 pyplot.show()
