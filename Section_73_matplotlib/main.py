@@ -17,11 +17,13 @@ reshaped_data_frame = data_frame.pivot(index='Date', columns='Tag', values='Post
 print(reshaped_data_frame.head())
 print(reshaped_data_frame.columns)
 
+rolling_data_frame = reshaped_data_frame.rolling(window=6).mean()
+
 pyplot.figure(figsize=(16, 10))
 pyplot.xlabel('Date', fontsize=14)
 pyplot.ylabel('Posts', fontsize=14)
 pyplot.ylim(0, 35000)
-for column in reshaped_data_frame.columns:
-    pyplot.plot(reshaped_data_frame.index, reshaped_data_frame[column], linewidth=3, label=reshaped_data_frame[column].name)
+for column in rolling_data_frame.columns:
+    pyplot.plot(rolling_data_frame.index, rolling_data_frame[column], linewidth=3, label=rolling_data_frame[column].name)
 pyplot.legend(fontsize=16)
 pyplot.show()
