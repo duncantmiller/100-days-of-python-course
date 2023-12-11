@@ -1,4 +1,5 @@
 import pandas
+import matplotlib.pyplot as pyplot
 
 data_frame = pandas.read_csv('data/colors.csv')
 
@@ -23,3 +24,7 @@ print(rows.count()['set_num'])
 top_5_parts_ids = data_frame['num_parts'].sort_values(ascending=False).head(5).index
 
 print(data_frame.loc[top_5_parts_ids]['name'])
+
+sets_by_year = data_frame.groupby('year').count()
+pyplot.plot(sets_by_year.index, sets_by_year)
+pyplot.show()
