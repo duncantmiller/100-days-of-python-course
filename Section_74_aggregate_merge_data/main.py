@@ -16,5 +16,6 @@ print(rows['name'])
 
 # How many different products did the LEGO company sell in their first year of operation?
 
+print(rows.count()['set_num'])
 
 # What are the top 5 LEGO sets with the most number of parts?
