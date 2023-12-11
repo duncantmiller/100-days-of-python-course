@@ -11,3 +11,7 @@ print(type(data_frame['Date'][1]))
 
 data_frame['Date'] = pandas.to_datetime(data_frame['Date'])
 print(type(data_frame['Date'][1]))
+
+reshaped_data_frame = data_frame.pivot(index='Date', columns='Tag', values='Posts')
+print(reshaped_data_frame.head())
+print(reshaped_data_frame.columns)
