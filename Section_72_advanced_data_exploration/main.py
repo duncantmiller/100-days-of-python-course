@@ -15,3 +15,8 @@ print(clean_data_frame['Starting Median Salary'].idxmax())
 location_id = clean_data_frame['Starting Median Salary'].idxmax()
 print(clean_data_frame['Undergraduate Major'].loc[location_id])
 print(clean_data_frame['Starting Median Salary'].min())
+
+difference = clean_data_frame['Mid-Career 90th Percentile Salary'] - clean_data_frame['Mid-Career 10th Percentile Salary']
+print(difference)
+clean_data_frame.insert(5, 'Difference', difference)
+print(clean_data_frame.head())
