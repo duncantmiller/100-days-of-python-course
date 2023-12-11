@@ -23,3 +23,5 @@ print(clean_data_frame.head())
 low_risk = clean_data_frame.sort_values('Difference')
 print(low_risk[['Undergraduate Major', 'Difference']].head())
 print(clean_data_frame.groupby('Group').count())
+pandas.options.display.float_format = '{:,.2f}'.format
+print(clean_data_frame.groupby('Group')['Starting Median Salary'].mean())
