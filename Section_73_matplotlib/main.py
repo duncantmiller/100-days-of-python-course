@@ -17,5 +17,9 @@ reshaped_data_frame = data_frame.pivot(index='Date', columns='Tag', values='Post
 print(reshaped_data_frame.head())
 print(reshaped_data_frame.columns)
 
+pyplot.figure(figsize=(16, 10))
+pyplot.xlabel('Date', fontsize=14)
+pyplot.ylabel('Posts', fontsize=14)
+pyplot.ylim(0, 5000)
 pyplot.plot(reshaped_data_frame.index, reshaped_data_frame['ruby'])
 pyplot.show()
