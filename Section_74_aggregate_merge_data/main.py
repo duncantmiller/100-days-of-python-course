@@ -27,9 +27,11 @@ print(data_frame.loc[top_5_parts_ids]['name'])
 
 # Make a chart of sets by year
 
+axis_1 = pyplot.gca()
+axis_2 = axis_1.twinx()
 sets_by_year = data_frame.groupby('year').count()
 sets_by_year_mod = sets_by_year.sort_index()[:-2]
-pyplot.plot(sets_by_year_mod.index, sets_by_year_mod)
+axis_1.plot(sets_by_year_mod.index, sets_by_year_mod)
 
 # use agg function to get themes by year
 themes_by_year = data_frame.groupby('year').agg({'theme_id': pandas.Series.nunique})
@@ -37,6 +39,6 @@ themes_by_year = data_frame.groupby('year').agg({'theme_id': pandas.Series.nuniq
 themes_by_year.rename(columns= {'theme_id': 'theme count'}, inplace = True)
 print(themes_by_year.head())
 
-pyplot.plot(sets_by_year_mod.index, themes_by_year[:-2])
+axis_2.plot(sets_by_year_mod.index, themes_by_year[:-2])
 
 pyplot.show()
