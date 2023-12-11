@@ -21,5 +21,7 @@ pyplot.figure(figsize=(16, 10))
 pyplot.xlabel('Date', fontsize=14)
 pyplot.ylabel('Posts', fontsize=14)
 pyplot.ylim(0, 35000)
-pyplot.plot(reshaped_data_frame.index, reshaped_data_frame['ruby'], reshaped_data_frame['python'])
+for column in reshaped_data_frame.columns:
+    pyplot.plot(reshaped_data_frame.index, reshaped_data_frame[column], linewidth=3, label=reshaped_data_frame[column].name)
+pyplot.legend(fontsize=16)
 pyplot.show()
