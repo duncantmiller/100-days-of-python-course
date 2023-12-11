@@ -30,4 +30,9 @@ print(data_frame.loc[top_5_parts_ids]['name'])
 sets_by_year = data_frame.groupby('year').count()
 sets_by_year_mod = sets_by_year.sort_index()[:-2]
 pyplot.plot(sets_by_year_mod.index, sets_by_year_mod)
+
+# use agg function to get themes by year
+themes_by_year = data_frame.groupby('year').agg({'theme_id': pandas.Series.nunique})
+print(themes_by_year.head())
+
 pyplot.show()
