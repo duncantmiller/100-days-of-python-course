@@ -33,6 +33,8 @@ pyplot.plot(sets_by_year_mod.index, sets_by_year_mod)
 
 # use agg function to get themes by year
 themes_by_year = data_frame.groupby('year').agg({'theme_id': pandas.Series.nunique})
+
+themes_by_year.rename(columns= {'theme_id': 'theme count'}, inplace = True)
 print(themes_by_year.head())
 
 pyplot.show()
