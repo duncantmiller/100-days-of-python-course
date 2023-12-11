@@ -19,3 +19,7 @@ print(rows['name'])
 print(rows.count()['set_num'])
 
 # What are the top 5 LEGO sets with the most number of parts?
+
+top_5_parts_ids = data_frame['num_parts'].sort_values(ascending=False).head(5).index
+
+print(data_frame.loc[top_5_parts_ids]['name'])
