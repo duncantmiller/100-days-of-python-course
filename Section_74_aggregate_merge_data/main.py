@@ -26,5 +26,6 @@ top_5_parts_ids = data_frame['num_parts'].sort_values(ascending=False).head(5).i
 print(data_frame.loc[top_5_parts_ids]['name'])
 
 sets_by_year = data_frame.groupby('year').count()
-pyplot.plot(sets_by_year.index, sets_by_year)
+sets_by_year_mod = sets_by_year.sort_index()[:-2]
+pyplot.plot(sets_by_year_mod.index, sets_by_year_mod)
 pyplot.show()
