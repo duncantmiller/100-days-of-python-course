@@ -20,3 +20,5 @@ difference = clean_data_frame['Mid-Career 90th Percentile Salary'] - clean_data_
 print(difference)
 clean_data_frame.insert(5, 'Difference', difference)
 print(clean_data_frame.head())
+low_risk = clean_data_frame.sort_values('Difference')
+print(low_risk[['Undergraduate Major', 'Difference']].head())
