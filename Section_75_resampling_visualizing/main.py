@@ -18,3 +18,5 @@ df_btc_price['DATE'] = pandas.to_datetime(df_btc_price['DATE'])
 df_btc_search['MONTH'] = pandas.to_datetime(df_btc_search['MONTH'])
 
 print(type(df_tesla['MONTH'][0]))
+df_btc_monthly = df_btc_price.resample('M', on="DATE").last()
+print(df_btc_monthly)
