@@ -7,9 +7,8 @@ df_btc_search = pandas.read_csv('Bitcoin Search Trend.csv')
 
 print(df_btc_price[df_btc_price.isna().any(axis=1)])
 print(df_btc_price.isna().sum())
-
-df_tesla_cl = df_tesla.dropna()
-df_unemployment_cl = df_unemployment.dropna()
-df_btc_price_cl = df_btc_price.dropna()
-df_btc_search_cl = df_btc_search.dropna()
+df_tesla.dropna(inplace=True)
+df_unemployment.dropna(inplace=True)
+df_btc_price.dropna(inplace=True)
+df_btc_search.dropna(inplace=True)
 
