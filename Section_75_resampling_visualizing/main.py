@@ -1,4 +1,5 @@
 import pandas
+import matplotlib.pyplot as pyplot
 
 df_tesla = pandas.read_csv('TESLA Search Trend vs Price.csv')
 df_unemployment = pandas.read_csv('UE Benefits Search vs UE Rate 2004-20.csv')
@@ -20,3 +21,15 @@ df_btc_search['MONTH'] = pandas.to_datetime(df_btc_search['MONTH'])
 print(type(df_tesla['MONTH'][0]))
 df_btc_monthly = df_btc_price.resample('M', on="DATE").last()
 print(df_btc_monthly)
+
+print(df_tesla.head())
+pyplot.figure(figsize=(14, 9))
+axis_1 = pyplot.gca()
+axis_1.plot(df_tesla.index, df_tesla['TSLA_WEB_SEARCH'])
+axis_2 = axis_1.twinx()
+axis_2.plot(df_tesla.index, df_tesla['TSLA_USD_CLOSE'], color="Red")
+axis_1.set_ylabel('TSLA Stock Price')
+axis_2.set_ylabel('Search Trend', color="Red")
+
+pyplot.show()
+
