@@ -8,3 +8,5 @@ set_theme_count = pandas.DataFrame(sets_data_frame['theme_id'].value_counts())
 merged_data_frame = pandas.merge(set_theme_count, themes_data_frame, left_on='theme_id', right_on='id', how='inner')
 
 print(merged_data_frame)
+pyplot.bar(merged_data_frame['name'][:10], merged_data_frame['count'][:10])
+pyplot.show()
