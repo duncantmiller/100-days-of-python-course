@@ -12,7 +12,9 @@ df_unemployment.dropna(inplace=True)
 df_btc_price.dropna(inplace=True)
 df_btc_search.dropna(inplace=True)
 
-print(pandas.to_datetime(df_tesla['MONTH']))
-print(pandas.to_datetime(df_unemployment['MONTH']))
-print(pandas.to_datetime(df_btc_price['DATE']))
-print(pandas.to_datetime(df_btc_search['MONTH']))
+df_tesla['MONTH'] = pandas.to_datetime(df_tesla['MONTH'])
+df_unemployment['MONTH'] = pandas.to_datetime(df_unemployment['MONTH'])
+df_btc_price['DATE'] = pandas.to_datetime(df_btc_price['DATE'])
+df_btc_search['MONTH'] = pandas.to_datetime(df_btc_search['MONTH'])
+
+print(type(df_tesla['MONTH'][0]))
