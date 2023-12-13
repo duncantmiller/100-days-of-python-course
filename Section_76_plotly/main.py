@@ -45,3 +45,9 @@ df_apps_clean["Revenue"] = df_apps_clean["Price"] * df_apps_clean["Installs"]
 print(df_apps_clean.sort_values("Revenue", ascending=False).head(10))
 df_apps_clean = df_apps_clean[df_apps_clean['Price'] < 250]
 print(df_apps_clean.sort_values("Revenue", ascending=False).head(10))
+
+top_10_category = df_apps_clean["Category"].value_counts().head(10)
+print(top_10_category)
+
+bar = plotly.bar(x=top_10_category.index, y=top_10_category.values)
+bar.show()
