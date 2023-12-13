@@ -37,7 +37,11 @@ def clean_string(value):
 df_apps_clean["Installs"] = pandas.to_numeric(df_apps_clean["Installs"].apply(clean_string))
 
 print(type(df_apps_clean["Installs"].values[0]))
-print(df_apps_clean[['App', 'Installs']].groupby('Installs').count())
+print(df_apps_clean[["App", "Installs"]].groupby("Installs").count())
 
 df_apps_clean["Price"] = pandas.to_numeric(df_apps_clean["Price"].apply(clean_string))
 print(type(df_apps_clean["Price"].values[0]))
+df_apps_clean["Revenue"] = df_apps_clean["Price"] * df_apps_clean["Installs"]
+print(df_apps_clean.sort_values("Revenue", ascending=False).head(10))
+df_apps_clean = df_apps_clean[df_apps_clean['Price'] < 250]
+print(df_apps_clean.sort_values("Revenue", ascending=False).head(10))
