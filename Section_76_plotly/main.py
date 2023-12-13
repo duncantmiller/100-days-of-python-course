@@ -63,20 +63,23 @@ new_df = category_installs.merge(apps_per_category, on="Category", how="inner")
 
 print(new_df)
 
-scatter = plotly.scatter(
-    new_df,
-    x="App",
-    y="Installs",
-    title="Category concentration",
-    size="App",
-    hover_name=new_df.index,
-    color="Installs"
-)
+# scatter = plotly.scatter(
+#     new_df,
+#     x="App",
+#     y="Installs",
+#     title="Category concentration",
+#     size="App",
+#     hover_name=new_df.index,
+#     color="Installs"
+# )
 
-scatter.update_layout(
-    xaxis_title="Number of Apps",
-    yaxis_title="Installs",
-    yaxis=dict(type="log")
-)
+# scatter.update_layout(
+#     xaxis_title="Number of Apps",
+#     yaxis_title="Installs",
+#     yaxis=dict(type="log")
+# )
 
-scatter.show()
+# scatter.show()
+
+genre_stack = df_apps_clean["Genres"].str.split(';', expand=True).stack(future_stack=True)
+print(genre_stack.value_counts())
