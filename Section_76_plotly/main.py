@@ -53,9 +53,12 @@ bar = plotly.bar(x=top_10_category.index, y=top_10_category.values)
 # bar.show()
 
 category_installs = df_apps_clean.groupby("Category").agg({"Installs": pandas.Series.sum})
-category_installs.sort_values("Installs", inplace=True)
+apps_per_category = df_apps_clean.groupby("Category").agg({"App": pandas.Series.count})
+new_df = category_installs.merge(apps_per_category, on="Category", how="inner")
 
-h_bar = plotly.bar(x=category_installs["Installs"], y=category_installs.index, orientation="h", title='Category Popularity')
-h_bar.update_layout(xaxis_title="Number of Downloads", yaxis_title="Category")
+# h_bar = plotly.bar(x=category_installs["Installs"], y=category_installs.index, orientation="h", title='Category Popularity')
+# h_bar.update_layout(xaxis_title="Number of Downloads", yaxis_title="Category")
 
-h_bar.show()
+# h_bar.show()
+
+print(new_df)
