@@ -35,3 +35,4 @@ def convert_to_int(installs):
 df_apps_clean["Installs"] = df_apps_clean["Installs"].apply(convert_to_int)
 
 print(type(df_apps_clean["Installs"].values[0]))
+print(df_apps_clean[['App', 'Installs']].groupby('Installs').count())
