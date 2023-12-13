@@ -28,11 +28,16 @@ print(rating_counts)
 
 print(type(df_apps_clean["Installs"].values[0]))
 
-def convert_to_int(installs):
-    """removes commas and converts string to int"""
-    return int(installs.replace(',', ''))
+def clean_string(value):
+    """cleans string"""
+    no_commas = value.replace(',', '')
+    clean_str = no_commas.replace('$', '')
+    return clean_str
 
-df_apps_clean["Installs"] = df_apps_clean["Installs"].apply(convert_to_int)
+df_apps_clean["Installs"] = pandas.to_numeric(df_apps_clean["Installs"].apply(clean_string))
 
 print(type(df_apps_clean["Installs"].values[0]))
 print(df_apps_clean[['App', 'Installs']].groupby('Installs').count())
+
+df_apps_clean["Price"] = pandas.to_numeric(df_apps_clean["Price"].apply(clean_string))
+print(type(df_apps_clean["Price"].values[0]))
