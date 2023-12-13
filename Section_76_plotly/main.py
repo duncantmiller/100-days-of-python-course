@@ -16,12 +16,14 @@ print(df_apps_clean[df_apps_clean['App'] == 'Instagram'])
 print(df_apps_clean.sort_values("Rating"))
 rating_counts = df_apps_clean.value_counts("Content_Rating")
 print(rating_counts)
-fig = plotly.pie(
-    labels=rating_counts.index,
-    values=rating_counts.values,
-    title="Content Rating",
-    names=rating_counts.index,
-    hole=0.6
-)
-fig.update_traces(textposition='inside', textinfo='percent', textfont_size=15)
-fig.show()
+# fig = plotly.pie(
+#     labels=rating_counts.index,
+#     values=rating_counts.values,
+#     title="Content Rating",
+#     names=rating_counts.index,
+#     hole=0.6
+# )
+# fig.update_traces(textposition='inside', textinfo='percent', textfont_size=15)
+# fig.show()
+
+print(type(df_apps_clean["Installs"].values[0]))
