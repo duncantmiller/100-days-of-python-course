@@ -7,4 +7,6 @@ print(df_apps.sample())
 df_apps_clean = df_apps.dropna()
 print(df_apps.sample())
 print(df_apps_clean.shape)
+df_apps_clean.drop_duplicates(inplace=True)
+print(df_apps_clean.duplicated().sum())
 
