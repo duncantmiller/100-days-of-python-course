@@ -50,4 +50,12 @@ top_10_category = df_apps_clean["Category"].value_counts().head(10)
 print(top_10_category)
 
 bar = plotly.bar(x=top_10_category.index, y=top_10_category.values)
-bar.show()
+# bar.show()
+
+category_installs = df_apps_clean.groupby("Category").agg({"Installs": pandas.Series.sum})
+category_installs.sort_values("Installs", inplace=True)
+
+h_bar = plotly.bar(x=category_installs["Installs"], y=category_installs.index, orientation="h", title='Category Popularity')
+h_bar.update_layout(xaxis_title="Number of Downloads", yaxis_title="Category")
+
+h_bar.show()
