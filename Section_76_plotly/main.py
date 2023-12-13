@@ -87,7 +87,15 @@ value_counts = genre_stack.value_counts()
 bar = plotly.bar(
     x=value_counts.index,
     y=value_counts.values,
+    title="Genres",
+    hover_name=value_counts.index,
     color=value_counts.values,
     color_continuous_scale='Agsunset'
+)
+bar.update_layout(
+    xaxis_title="Genre",
+    yaxis_title="Number of Apps",
+    coloraxis_showscale=False,
+    xaxis_tickangle=45
 )
 bar.show()
