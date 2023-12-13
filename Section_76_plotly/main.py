@@ -1,4 +1,5 @@
 import pandas
+import plotly.express as plotly
 
 df_apps = pandas.read_csv('apps.csv')
 df_apps.drop(columns=['Last_Updated', 'Android_Ver'], inplace=True)
@@ -15,3 +16,5 @@ print(df_apps_clean[df_apps_clean['App'] == 'Instagram'])
 print(df_apps_clean.sort_values("Rating"))
 rating_counts = df_apps_clean.value_counts("Content_Rating")
 print(rating_counts)
+fig = plotly.pie(labels=rating_counts.index, values=rating_counts.values)
+fig.show()
