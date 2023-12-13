@@ -27,3 +27,11 @@ print(rating_counts)
 # fig.show()
 
 print(type(df_apps_clean["Installs"].values[0]))
+
+def convert_to_int(installs):
+    """removes commas and converts string to int"""
+    return int(installs.replace(',', ''))
+
+df_apps_clean["Installs"] = df_apps_clean["Installs"].apply(convert_to_int)
+
+print(type(df_apps_clean["Installs"].values[0]))
