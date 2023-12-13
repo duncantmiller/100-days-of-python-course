@@ -84,5 +84,10 @@ print(new_df)
 genre_stack = df_apps_clean["Genres"].str.split(';', expand=True).stack(future_stack=True)
 print(genre_stack.value_counts())
 value_counts = genre_stack.value_counts()
-bar = plotly.bar(x=value_counts.index, y=value_counts)
+bar = plotly.bar(
+    x=value_counts.index,
+    y=value_counts.values,
+    color=value_counts.values,
+    color_continuous_scale='Agsunset'
+)
 bar.show()
