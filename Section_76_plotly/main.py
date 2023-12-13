@@ -9,4 +9,6 @@ print(df_apps.sample())
 print(df_apps_clean.shape)
 df_apps_clean.drop_duplicates(inplace=True)
 print(df_apps_clean.duplicated().sum())
-
+print(df_apps_clean[df_apps_clean['App'] == 'Instagram'])
+df_apps_clean.drop_duplicates(inplace=True, subset=['App', 'Type', 'Price'])
+print(df_apps_clean[df_apps_clean['App'] == 'Instagram'])
