@@ -19,3 +19,12 @@ for column in columns_to_clean:
 df_clean['Release_Date'] = pandas.to_datetime(df_clean['Release_Date'])
 
 print(df_clean.info())
+
+print(df_clean['USD_Production_Budget'].mean())
+print(df_clean['USD_Worldwide_Gross'].mean())
+print(df_clean['USD_Worldwide_Gross'].min())
+print(df_clean['USD_Domestic_Gross'].min())
+
+df_clean['Profit'] = df_clean['USD_Worldwide_Gross'] + df_clean['USD_Domestic_Gross'] - df_clean['USD_Production_Budget']
+
+print(df_clean.sort_values('Profit').head(25))
