@@ -74,8 +74,12 @@ print(old_films)
 print(old_films.shape)
 print(new_films.shape)
 
-seaborn.regplot(data=old_films,
-                x='USD_Production_Budget',
-                y='USD_Worldwide_Gross'
-)
-pyplot.show()
+pyplot.figure(figsize=(8,4), dpi=200)
+with seaborn.axes_style("whitegrid"):
+    seaborn.regplot(data=old_films,
+                    x='USD_Production_Budget',
+                    y='USD_Worldwide_Gross',
+                    scatter_kws={'alpha': 0.4},
+                    line_kws={'color': 'black'}
+    )
+    pyplot.show()
