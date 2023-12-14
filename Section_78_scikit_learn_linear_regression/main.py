@@ -44,6 +44,7 @@ future_releases = df_clean[df_clean['Release_Date'] >= scraped]
 
 df_clean_past = df_clean.drop(future_releases.index)
 
+pyplot.figure(figsize=(8,4), dpi=200)
 seaborn.scatterplot(data=df_clean_past, x='USD_Production_Budget', y='USD_Worldwide_Gross')
 
 pyplot.show()
