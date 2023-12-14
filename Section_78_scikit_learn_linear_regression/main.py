@@ -32,3 +32,7 @@ print(df_clean.sort_values('Profit').head(25))
 print(df_clean[df_clean['USD_Domestic_Gross'] == 0])
 
 print(df_clean.describe())
+
+int_releases = df_clean.query('USD_Worldwide_Gross != 0 and USD_Domestic_Gross == 0')
+print(len(int_releases))
+print(int_releases)
