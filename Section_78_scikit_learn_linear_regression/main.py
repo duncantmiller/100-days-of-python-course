@@ -16,4 +16,6 @@ for column in columns_to_clean:
         df_clean[column] = df_clean[column].astype(str).str.replace(character, "")
     df_clean[column] = pandas.to_numeric(df_clean[column])
 
+df_clean['Release_Date'] = pandas.to_datetime(df_clean['Release_Date'])
+
 print(df_clean.info())
