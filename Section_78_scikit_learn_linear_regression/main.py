@@ -30,3 +30,5 @@ df_clean['Profit'] = df_clean['USD_Worldwide_Gross'] + df_clean['USD_Domestic_Gr
 print(df_clean.sort_values('Profit').head(25))
 
 print(df_clean[df_clean['USD_Domestic_Gross'] == 0])
+
+print(df_clean.describe())
