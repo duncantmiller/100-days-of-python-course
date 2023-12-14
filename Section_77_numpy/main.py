@@ -34,3 +34,6 @@ print(tensor[:, :, 0])
 
 a = np.arange(10, 30)
 print(a)
+
+sub_a = a[17:]
+print(sub_a)
