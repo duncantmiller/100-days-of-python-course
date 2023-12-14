@@ -54,3 +54,10 @@ print(df['category'].nunique())
 
 category_m_f = df.groupby(['category', 'sex'], as_index=False).agg({'prize': pandas.Series.count})
 print(category_m_f)
+
+vbar_split = plotly.bar(x= category_m_f['category'],
+                        y= category_m_f['prize'],
+                        color= category_m_f['sex'],
+                        title='prizes per category split by men and women')
+
+vbar_split.show()
