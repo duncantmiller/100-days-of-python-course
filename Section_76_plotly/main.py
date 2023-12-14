@@ -84,18 +84,30 @@ print(new_df)
 genre_stack = df_apps_clean["Genres"].str.split(';', expand=True).stack(future_stack=True)
 print(genre_stack.value_counts())
 value_counts = genre_stack.value_counts()
-bar = plotly.bar(
-    x=value_counts.index,
-    y=value_counts.values,
-    title="Genres",
-    hover_name=value_counts.index,
-    color=value_counts.values,
-    color_continuous_scale='Agsunset'
-)
-bar.update_layout(
-    xaxis_title="Genre",
-    yaxis_title="Number of Apps",
-    coloraxis_showscale=False,
-    xaxis_tickangle=45
-)
-bar.show()
+# bar = plotly.bar(
+#     x=value_counts.index,
+#     y=value_counts.values,
+#     title="Genres",
+#     hover_name=value_counts.index,
+#     color=value_counts.values,
+#     color_continuous_scale='Agsunset'
+# )
+# bar.update_layout(
+#     xaxis_title="Genre",
+#     yaxis_title="Number of Apps",
+#     coloraxis_showscale=False,
+#     xaxis_tickangle=45
+# )
+# bar.show()
+
+box = plotly.box(df_apps_clean,
+             y='Installs',
+             x='Type',
+             color='Type',
+             notched=True,
+             points='all',
+             title='How Many Downloads are Paid Apps Giving Up?')
+
+box.update_layout(yaxis=dict(type='log'))
+
+box.show()
