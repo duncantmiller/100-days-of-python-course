@@ -35,5 +35,9 @@ print(tensor[:, :, 0])
 a = np.arange(10, 30)
 print(a)
 
-sub_a = a[17:]
-print(sub_a)
+sub_a_last_three = a[17:]
+print(sub_a_last_three)
+sub_a_last_eight = a[12:]
+print(sub_a_last_eight)
+sub_a_even = a[::2]
+print(sub_a_even)
