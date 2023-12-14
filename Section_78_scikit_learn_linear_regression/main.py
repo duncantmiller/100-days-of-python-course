@@ -1,4 +1,6 @@
 import pandas
+import matplotlib.pyplot as pyplot
+import seaborn
 
 df = pandas.read_csv('cost_revenue_dirty.csv')
 print(df.shape)
@@ -36,3 +38,12 @@ print(df_clean.describe())
 int_releases = df_clean.query('USD_Worldwide_Gross != 0 and USD_Domestic_Gross == 0')
 print(len(int_releases))
 print(int_releases)
+
+scraped = pandas.Timestamp('2018-5-1')
+future_releases = df_clean[df_clean['Release_Date'] >= scraped]
+
+df_clean_past = df_clean.drop(future_releases.index)
+
+seaborn.scatterplot(data=df_clean_past, x='USD_Production_Budget', y='USD_Worldwide_Gross')
+
+pyplot.show()
