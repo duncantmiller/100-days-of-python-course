@@ -28,3 +28,5 @@ print(df_clean['USD_Domestic_Gross'].min())
 df_clean['Profit'] = df_clean['USD_Worldwide_Gross'] + df_clean['USD_Domestic_Gross'] - df_clean['USD_Production_Budget']
 
 print(df_clean.sort_values('Profit').head(25))
+
+print(df_clean[df_clean['USD_Domestic_Gross'] == 0])
