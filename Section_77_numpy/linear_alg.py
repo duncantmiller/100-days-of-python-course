@@ -21,5 +21,12 @@ print(np.matmul(a1, b1))
 
 image = Image.open('yummy_macarons.jpg')
 
-pyplot.imshow(image)
+image_array = np.array(image)
+print(image_array.shape)
+
+bw_image = image_array / 255
+grey_vals = np.array([0.2126, 0.7152, 0.0722])
+bw_image = bw_image @ grey_vals
+
+pyplot.imshow(bw_image, cmap='gray')
 pyplot.show()
