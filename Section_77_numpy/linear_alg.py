@@ -28,5 +28,6 @@ bw_image = image_array / 255
 grey_vals = np.array([0.2126, 0.7152, 0.0722])
 bw_image = bw_image @ grey_vals
 
+bw_image = np.flip(bw_image)
 pyplot.imshow(bw_image, cmap='gray')
 pyplot.show()
