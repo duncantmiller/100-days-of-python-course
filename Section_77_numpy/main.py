@@ -46,3 +46,10 @@ print(reversed_a)
 
 b = [6,0,9,0,0,5,0]
 print(np.nonzero(b)[0].tolist())
+
+rng = np.random.default_rng()
+array_a = rng.integers(low=0, high=10, size=27)
+print(array_a)
+tensor_a = array_a.reshape(3, 3, 3)
+print(tensor_a)
+print(tensor_a.shape)
