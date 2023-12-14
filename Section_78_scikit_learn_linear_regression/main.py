@@ -44,22 +44,22 @@ future_releases = df_clean[df_clean['Release_Date'] >= scraped]
 
 df_clean_past = df_clean.drop(future_releases.index)
 
-pyplot.figure(figsize=(8,4), dpi=200)
+# pyplot.figure(figsize=(8,4), dpi=200)
 
-with seaborn.axes_style('darkgrid'):
-    ax = seaborn.scatterplot(
-        data=df_clean_past,
-        x='USD_Production_Budget',
-        y='USD_Worldwide_Gross',
-        hue='USD_Worldwide_Gross',
-        size='USD_Worldwide_Gross'
-    )
+# with seaborn.axes_style('darkgrid'):
+#     ax = seaborn.scatterplot(
+#         data=df_clean_past,
+#         x='USD_Production_Budget',
+#         y='USD_Worldwide_Gross',
+#         hue='USD_Worldwide_Gross',
+#         size='USD_Worldwide_Gross'
+#     )
 
-    ax.set(ylim=(0, 3000000000),
-        xlim=(0, 450000000),
-        ylabel='Revenue in $ billions',
-        xlabel='Budget in $100 millions'
-    )
+#     ax.set(ylim=(0, 3000000000),
+#         xlim=(0, 450000000),
+#         ylabel='Revenue in $ billions',
+#         xlabel='Budget in $100 millions'
+#     )
 
 # pyplot.show()
 
@@ -73,3 +73,9 @@ new_films = df_clean_past[df_clean_past['Decade'] > 1960]
 print(old_films)
 print(old_films.shape)
 print(new_films.shape)
+
+seaborn.regplot(data=old_films,
+                x='USD_Production_Budget',
+                y='USD_Worldwide_Gross'
+)
+pyplot.show()
