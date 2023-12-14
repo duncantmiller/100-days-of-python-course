@@ -38,16 +38,19 @@ print(mutiple_winners['full_name'].nunique())
 
 print(df['category'].nunique())
 
-prizes_per_category = df['category'].value_counts()
-vbar = plotly.bar(
-       x = prizes_per_category.index,
-       y = prizes_per_category.values,
-       color = prizes_per_category.values,
-       color_continuous_scale='Aggrnyl',
-       title='Number of prizes per category'
-)
-vbar.update_layout(xaxis_title='Prize Category',
-                   coloraxis_showscale=False,
-                   yaxis_title='Number of prizes')
+# prizes_per_category = df['category'].value_counts()
+# vbar = plotly.bar(
+#        x = prizes_per_category.index,
+#        y = prizes_per_category.values,
+#        color = prizes_per_category.values,
+#        color_continuous_scale='Aggrnyl',
+#        title='Number of prizes per category'
+# )
+# vbar.update_layout(xaxis_title='Prize Category',
+#                    coloraxis_showscale=False,
+#                    yaxis_title='Number of prizes')
 
-vbar.show()
+# vbar.show()
+
+category_m_f = df.groupby(['category', 'sex'], as_index=False).agg({'prize': pandas.Series.count})
+print(category_m_f)
