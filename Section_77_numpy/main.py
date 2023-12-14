@@ -41,3 +41,8 @@ sub_a_last_eight = a[12:]
 print(sub_a_last_eight)
 sub_a_even = a[::2]
 print(sub_a_even)
+reversed_a = np.flip(a)
+print(reversed_a)
+
+b = [6,0,9,0,0,5,0]
+print(np.nonzero(b)[0].tolist())
