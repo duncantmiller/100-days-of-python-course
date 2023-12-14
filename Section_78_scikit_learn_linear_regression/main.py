@@ -67,3 +67,9 @@ date_data = pandas.DatetimeIndex(df_clean_past['Release_Date'])
 year = date_data.year
 df_clean_past['Decade'] = year//10*10
 print(df_clean_past.head())
+
+old_films = df_clean_past[df_clean_past['Decade'] <= 1960]
+new_films = df_clean_past[df_clean_past['Decade'] > 1960]
+print(old_films)
+print(old_films.shape)
+print(new_films.shape)
