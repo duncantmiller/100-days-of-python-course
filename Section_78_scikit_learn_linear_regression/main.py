@@ -1,6 +1,7 @@
 import pandas
 import matplotlib.pyplot as pyplot
 import seaborn
+from sklearn.linear_model import LinearRegression
 
 df = pandas.read_csv('cost_revenue_dirty.csv')
 print(df.shape)
@@ -74,12 +75,23 @@ print(old_films)
 print(old_films.shape)
 print(new_films.shape)
 
-pyplot.figure(figsize=(8,4), dpi=200)
-with seaborn.axes_style("whitegrid"):
-    seaborn.regplot(data=old_films,
-                    x='USD_Production_Budget',
-                    y='USD_Worldwide_Gross',
-                    scatter_kws={'alpha': 0.4},
-                    line_kws={'color': 'black'}
-    )
-    pyplot.show()
+# pyplot.figure(figsize=(8,4), dpi=200)
+# with seaborn.axes_style("whitegrid"):
+#     seaborn.regplot(data=old_films,
+#                     x='USD_Production_Budget',
+#                     y='USD_Worldwide_Gross',
+#                     scatter_kws={'alpha': 0.4},
+#                     line_kws={'color': 'black'}
+#     )
+#     pyplot.show()
+
+regression = LinearRegression()
+
+X = pandas.DataFrame(new_films, columns=['USD_Production_Budget'])
+y = pandas.DataFrame(new_films, columns=['USD_Worldwide_Gross'])
+
+regression.fit(X, y)
+
+print(regression.intercept_)
+print(regression.coef_)
+print(regression.score(X, y))
