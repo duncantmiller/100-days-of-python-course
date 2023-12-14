@@ -29,5 +29,6 @@ grey_vals = np.array([0.2126, 0.7152, 0.0722])
 bw_image = bw_image @ grey_vals
 
 bw_image = np.flip(bw_image)
+bw_image = np.rot90(bw_image)
 pyplot.imshow(bw_image, cmap='gray')
 pyplot.show()
