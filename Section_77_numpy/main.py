@@ -1,0 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as pyplot
+from PIL import Image
+
+one_d_array = np.array([1, 2, 3])
+print(one_d_array.shape)
+print(one_d_array.ndim)
