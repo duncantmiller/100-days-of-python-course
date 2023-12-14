@@ -30,5 +30,8 @@ bw_image = bw_image @ grey_vals
 
 bw_image = np.flip(bw_image)
 bw_image = np.rot90(bw_image)
-pyplot.imshow(bw_image, cmap='gray')
+# pyplot.imshow(bw_image, cmap='gray')
+
+image_solar = 255 - image_array
+pyplot.imshow(image_solar)
 pyplot.show()
