@@ -31,3 +31,7 @@ sex_data = df['sex'].value_counts()
 # fig.show()
 
 print(df[df['sex'] == 'Female'].sort_values('year', ascending=True)[:3])
+
+is_winner = df.duplicated(subset=['full_name'], keep=False)
+mutiple_winners = df[is_winner]
+print(mutiple_winners['full_name'].nunique())
