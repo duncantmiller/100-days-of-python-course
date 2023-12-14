@@ -12,3 +12,18 @@ print(two_d_array.ndim)
 print(two_d_array[1, 0])
 print(two_d_array[0, :])
 print(two_d_array[:, 1])
+
+tensor = np.array(
+    [
+        [
+            [1, 2, 3],
+            [4, 5, 6]
+        ],
+        [
+            [7, 8, 9],
+            [10, 11, 12]
+        ]
+    ]
+)
+print(tensor.shape)
+print(tensor.ndim)
