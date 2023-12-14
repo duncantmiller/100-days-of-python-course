@@ -63,3 +63,5 @@ print(spaced_y)
 
 noise = np.random.rand(128, 128, 3)
 print(noise)
+pyplot.imshow(noise)
+pyplot.show()
