@@ -61,4 +61,9 @@ with seaborn.axes_style('darkgrid'):
         xlabel='Budget in $100 millions'
     )
 
-pyplot.show()
+# pyplot.show()
+
+date_data = pandas.DatetimeIndex(df_clean_past['Release_Date'])
+year = date_data.year
+df_clean_past['Decade'] = year//10*10
+print(df_clean_past.head())
