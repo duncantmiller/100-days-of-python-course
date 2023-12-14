@@ -31,3 +31,6 @@ print(tensor[0, 0, 0])
 print(tensor[1, 1, 2])
 print(tensor[1, 1, :])
 print(tensor[:, :, 0])
+
+a = np.arange(10, 30)
+print(a)
