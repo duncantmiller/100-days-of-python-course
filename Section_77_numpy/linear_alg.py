@@ -18,3 +18,8 @@ b1 = np.array([[4, 1, 3],
 
 print(a1 @ b1)
 print(np.matmul(a1, b1))
+
+image = Image.open('yummy_macarons.jpg')
+
+pyplot.imshow(image)
+pyplot.show()
