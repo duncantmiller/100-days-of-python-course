@@ -53,3 +53,6 @@ print(array_a)
 tensor_a = array_a.reshape(3, 3, 3)
 print(tensor_a)
 print(tensor_a.shape)
+
+spaced_a = np.linspace(0, 100, num=9)
+print(spaced_a)
