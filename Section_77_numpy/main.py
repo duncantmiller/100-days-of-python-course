@@ -27,3 +27,5 @@ tensor = np.array(
 )
 print(tensor.shape)
 print(tensor.ndim)
+print(tensor[0, 0, 0])
+print(tensor[1, 1, 2])
