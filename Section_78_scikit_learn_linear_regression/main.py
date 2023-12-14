@@ -95,3 +95,7 @@ regression.fit(X, y)
 print(regression.intercept_)
 print(regression.coef_)
 print(regression.score(X, y))
+
+budget = 350000000
+revenue_estimate = regression.intercept_[0] + regression.coef_[0, 0]*budget
+print(revenue_estimate)
