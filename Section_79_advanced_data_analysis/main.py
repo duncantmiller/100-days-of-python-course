@@ -86,11 +86,32 @@ df_countries = df.groupby(['birth_country_current', 'ISO'], as_index=False).agg(
 df_countries.sort_values('prize', ascending=False)
 
 world_map = plotly.choropleth(df_countries,
-                          locations='ISO',
-                          color='prize',
-                          hover_name='birth_country_current',
-                          color_continuous_scale=plotly.colors.sequential.matter)
+                              locations='ISO',
+                              color='prize',
+                              hover_name='birth_country_current',
+                              color_continuous_scale=plotly.colors.sequential.matter
+                              )
 
 world_map.update_layout(coloraxis_showscale=True,)
 
-world_map.show()
+# world_map.show()
+
+country_city_org = df.groupby(by=['organization_country',
+                                  'organization_city',
+                                  'organization_name'], as_index=False
+                             ).agg({'prize': pandas.Series.count})
+
+country_city_org = country_city_org.sort_values('prize', ascending=False)
+
+burst = plotly.sunburst(country_city_org,
+                        path=['organization_country', 'organization_city', 'organization_name'],
+                        values='prize',
+                        title='Where do Discoveries Take Place?'
+                        )
+
+burst.update_layout(xaxis_title='Number of Prizes',
+                    yaxis_title='City',
+                    coloraxis_showscale=False
+                   )
+
+burst.show()
