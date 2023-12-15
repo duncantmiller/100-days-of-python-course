@@ -55,9 +55,21 @@ print(df['category'].nunique())
 category_m_f = df.groupby(['category', 'sex'], as_index=False).agg({'prize': pandas.Series.count})
 print(category_m_f)
 
-vbar_split = plotly.bar(x= category_m_f['category'],
-                        y= category_m_f['prize'],
-                        color= category_m_f['sex'],
-                        title='prizes per category split by men and women')
+# vbar_split = plotly.bar(x= category_m_f['category'],
+#                         y= category_m_f['prize'],
+#                         color= category_m_f['sex'],
+#                         title='prizes per category split by men and women')
 
-vbar_split.show()
+# vbar_split.show()
+
+year_counts = df.groupby('year').size().reset_index(name='count')
+year_counts['rolling_avg'] = year_counts['count'].rolling(window=5, min_periods=1).mean()
+print(year_counts['rolling_avg'])
+
+# Create a scatter plot
+fig = plotly.scatter(year_counts, x='year', y='count', labels={'count': 'Count per Year'}, title='Scatter Plot with 5-Year Rolling Average')
+
+# Add the rolling average line
+fig.add_scatter(x=year_counts['year'], y=year_counts['rolling_avg'], mode='lines', name='5-Year Rolling Average')
+
+fig.show()
