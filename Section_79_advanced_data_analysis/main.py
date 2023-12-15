@@ -2,6 +2,7 @@ import pandas
 import matplotlib.pyplot as pyplot
 import plotly.express as plotly
 import seaborn
+import numpy
 
 df = pandas.read_csv('nobel_prize_data.csv')
 print(df.shape)
@@ -71,5 +72,10 @@ fig = plotly.scatter(year_counts, x='year', y='count', labels={'count': 'Count p
 
 # Add the rolling average line
 fig.add_scatter(x=year_counts['year'], y=year_counts['rolling_avg'], mode='lines', name='5-Year Rolling Average')
+
+years_ticks = numpy.arange(1900, 2021, step=5)
+
+# Set x-axis ticks for every 5 years
+fig.update_xaxes(tickvals=years_ticks, tickmode='array')
 
 fig.show()
