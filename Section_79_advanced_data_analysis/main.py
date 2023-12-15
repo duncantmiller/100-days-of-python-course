@@ -78,4 +78,19 @@ years_ticks = numpy.arange(1900, 2021, step=5)
 # Set x-axis ticks for every 5 years
 fig.update_xaxes(tickvals=years_ticks, tickmode='array')
 
-fig.show()
+# fig.show()
+
+df_countries = df.groupby(['birth_country_current', 'ISO'], as_index=False).agg(
+    {'prize': pandas.Series.count}
+)
+df_countries.sort_values('prize', ascending=False)
+
+world_map = plotly.choropleth(df_countries,
+                          locations='ISO',
+                          color='prize',
+                          hover_name='birth_country_current',
+                          color_continuous_scale=plotly.colors.sequential.matter)
+
+world_map.update_layout(coloraxis_showscale=True,)
+
+world_map.show()
